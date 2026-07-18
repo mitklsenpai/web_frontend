@@ -8,4 +8,9 @@ export default defineConfig({
     react({ exclude: [/\/pdf\//, /\.solid\.tsx$/, /\/node_modules\//] }),
     babel({ presets: [reactCompilerPreset()] })
   ],
+  resolve: {
+    alias: {
+      '@': '/src'
+    }
+  } 
 })
