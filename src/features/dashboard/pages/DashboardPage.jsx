@@ -1,54 +1,64 @@
 import MetricCard from "../components/MetricCard";
 import RecentActivity from "../components/RecentActivity";
-
 import useDashboard from "../hooks/useDashboard";
+import { Box, Typography, Grid } from "@mui/material";
 
 function DashboardPage() {
 
     const {
-
         dashboard,
-
         loading
-
     } = useDashboard();
 
     if (loading) {
-
         return <p>Loading...</p>;
-
     }
 
     return (
+        <Box
+            sx={{
+                backgroundColor: "background.default",
+                minHeight: "100vh",
+                p: 4
+            }}
+        >
 
-        <>
+            <Typography
+                variant="h4"
+                mb={3}
+            >
+                Dashboard
+            </Typography>
 
-            <MetricCard
 
-                title="Users"
+            <Grid container spacing={3}>
 
-                value={dashboard.totalUsers}
+                <Grid size={{ xs: 12, md: 3 }}>
+                    <MetricCard
+                        title="Users"
+                        value={dashboard.totalUsers}
+                    />
+                </Grid>
 
-            />
 
-            <MetricCard
+                <Grid size={{ xs: 12, md: 3 }}>
+                    <MetricCard
+                        title="Sessions"
+                        value={dashboard.totalSessions}
+                    />
+                </Grid>
 
-                title="Sessions"
 
-                value={dashboard.totalSessions}
+                <Grid size={{ xs: 12, md: 6 }}>
+                    <RecentActivity
+                        activities={dashboard}
+                    />
+                </Grid>
 
-            />
+            </Grid>
 
-            <RecentActivity
-
-                activities={dashboard.activities}
-
-            />
-
-        </>
-
+        </Box>
     );
-
 }
 
 export default DashboardPage;
