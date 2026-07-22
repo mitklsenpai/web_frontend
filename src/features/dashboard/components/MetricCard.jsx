@@ -21,7 +21,7 @@ function MetricCard({
             <Box
                 sx={{
                     display: "flex",
-                    alignItems: "center",
+                    alignitems: "center",
                     gap: 1
                 }}
             >

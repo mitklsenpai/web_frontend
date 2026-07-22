@@ -2,33 +2,23 @@ import {
     Card,
     CardContent,
     Typography,
-    Box
+    Box,
+    Stack
 } from "@mui/material";
 
 function RecentActivity({ activities }) {
     return (
         <Card
             sx={{
-                p: 2,
+                p: 3,
                 bgcolor: "background.paper",
                 border: "1px solid",
                 borderColor: "divider"
             }}
         >
-
             <CardContent sx={{ p: 0 }}>
-
-                <Typography
-                    variant="caption"
-                    color="text.secondary"
-                >
-                    Recent Activity
-                </Typography>
-
-
-                <Box mt={2}>
-
-                    <Box mb={2}>
+                <Stack spacing={2} mt={3}>
+                    <Box>
                         <Typography
                             variant="caption"
                             color="text.secondary"
@@ -51,7 +41,7 @@ function RecentActivity({ activities }) {
                         >
                             Tổng số phiên
                         </Typography>
-                        
+
                         <Typography
                             variant="h3"
                             color="secondary.main"
@@ -59,11 +49,8 @@ function RecentActivity({ activities }) {
                             {activities?.totalSessions ?? 0}
                         </Typography>
                     </Box>
-
-                </Box>
-
+                </Stack>
             </CardContent>
-
         </Card>
     );
 }

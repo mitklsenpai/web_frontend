@@ -23,17 +23,9 @@ function DashboardPage() {
             }}
         >
 
-            <Typography
-                variant="h4"
-                mb={3}
-            >
-                Dashboard
-            </Typography>
-
-
             <Grid container spacing={3}>
 
-                <Grid size={{ xs: 12, md: 3 }}>
+                <Grid size={{ xs: 12, md: 1.5 }}>
                     <MetricCard
                         title="Users"
                         value={dashboard.totalUsers}
@@ -41,7 +33,7 @@ function DashboardPage() {
                 </Grid>
 
 
-                <Grid size={{ xs: 12, md: 3 }}>
+                <Grid size={{ xs: 12, md: 1.7 }}>
                     <MetricCard
                         title="Sessions"
                         value={dashboard.totalSessions}
@@ -49,7 +41,7 @@ function DashboardPage() {
                 </Grid>
 
 
-                <Grid size={{ xs: 12, md: 6 }}>
+                <Grid size={{ xs: 12, md: 3 }}>
                     <RecentActivity
                         activities={dashboard}
                     />
