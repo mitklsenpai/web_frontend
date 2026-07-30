@@ -6,7 +6,6 @@ import Sidebar from "./Sidebar";
 // Outlet matchs with routes defines in App.jsx
 
 function AdminLayout() {
-    console.log("AdminLayout rendered");
     return (
         <Box
             sx={{

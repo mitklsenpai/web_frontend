@@ -17,13 +17,13 @@ export default function PageHeader() {
                     Dashboard
                 </Link>
 
-                <Link underline="hover">
+                {/* <Link underline="hover">
                     Users
                 </Link>
 
                 <Typography color="text.primary">
                     Detail
-                </Typography>
+                </Typography> */}
             </Breadcrumbs>
         </Box>
     );

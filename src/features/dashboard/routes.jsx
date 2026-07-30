@@ -2,7 +2,7 @@ import DashboardPage from "./pages/DashboardPage";
 
 const dashboardRoutes = [
     {
-        path: "/dashboard",
+        path: "/",
         element: <DashboardPage />
     }
 ];

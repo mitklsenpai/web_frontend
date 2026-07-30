@@ -1,24 +1,17 @@
-import {
-    Drawer,
-    Toolbar,
-    List,
-    ListItemButton,
-    ListItemText
-} from "@mui/material";
-
+import { useNavigate } from "react-router-dom";
+import { Drawer, Toolbar, List, ListItemButton, ListItemText} from "@mui/material";
 import Logo from "./Logo";
 
 const drawerWidth = 220;
 
-const menus = [
-    "Dashboard",
-    "Users",
-    "Roles",
-    "Access Point",
-    "Device"
-];
-
 export default function Sidebar() {
+    const navigate = useNavigate();
+
+    const menuItems = [
+        { label: "Dashboard", path: "/" },
+        { label: "Users", path: "/user" },
+    ];
+
     return (
         <Drawer
             variant="permanent"
@@ -33,15 +26,15 @@ export default function Sidebar() {
         >
             <Toolbar />
             
-            <Logo flexGrow={1} />
+            <Logo flexGrow={2} />
 
             <List>
 
-                {menus.map((item) => (
-                    <ListItemButton key={item}>
+                {menuItems.map((item) => (
+                    <ListItemButton onClick = {() => navigate(item.path)} key={item.label}>
 
                         <ListItemText
-                            primary={item}
+                            primary={item.label}
                         />
 
                     </ListItemButton>
