@@ -17,13 +17,22 @@ export default function PageHeader() {
                     Dashboard
                 </Link>
 
-                {/* <Link underline="hover">
+                {<Link underline="hover">
                     Users
-                </Link>
+                </Link>}
+
+                {/* 
+                {<Link underline="hover" heref="/user">
+                    Users
+                </Link>}
+                
+                Add heref + route when user click on link -> navigate to page
+                */}
+
 
                 <Typography color="text.primary">
                     Detail
-                </Typography> */}
+                </Typography>
             </Breadcrumbs>
         </Box>
     );

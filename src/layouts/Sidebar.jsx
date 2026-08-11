@@ -24,9 +24,9 @@ export default function Sidebar() {
                 }
             }}
         >
-            <Toolbar />
+            {/* <Toolbar /> */}
             
-            <Logo flexGrow={2} />
+            <Logo/>
 
             <List>
 

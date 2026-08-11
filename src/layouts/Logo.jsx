@@ -5,24 +5,30 @@ export default function Logo() {
         <Box
             sx={{
                 display: "flex",
+                justifyContent: "flex-center",
                 alignItems: "center",
-                gap: 1
+                marginLeft: "20px",
+                marginTop: "20px",
+                gap: 2
             }}
         >
             <Box
                 sx={{
                     width: 40,
                     height: 40,
-                    borderRadius: 2,
+                    borderRadius: "20%",
                     bgcolor: "primary.main"
                 }}
             />
 
             <Typography
-                variant="h6"
-                fontWeight={700}
+                variant="h4"
+                color="text.secondary"
+                sx={{
+                    fontWeight: 600
+                }}
             >
-                EyeTrax
+                Eye Tracker
             </Typography>
         </Box>
     );

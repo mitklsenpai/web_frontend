@@ -10,7 +10,9 @@ function AdminLayout() {
         <Box
             sx={{
                 display: "flex",
-                height: "100vh"
+                width: "100%",
+                minHeight: "100vh",
+                overflow: "hidden",
             }}
         >
             <Box sx={{ bgcolor: "lightblue" }}>
