@@ -5,21 +5,14 @@ import {
     Box
 } from "@mui/material";
 
-export default function PageHeader() {
+export default function PageHeader({ title }) {
     return (
         <Box ml={3}>
             <Typography variant="h5">
-                User Management
+                {title}
             </Typography>
 
             <Breadcrumbs>
-                <Link underline="hover">
-                    Dashboard
-                </Link>
-
-                {<Link underline="hover">
-                    Users
-                </Link>}
 
                 {/* 
                 {<Link underline="hover" heref="/user">
@@ -29,10 +22,6 @@ export default function PageHeader() {
                 Add heref + route when user click on link -> navigate to page
                 */}
 
-
-                <Typography color="text.primary">
-                    Detail
-                </Typography>
             </Breadcrumbs>
         </Box>
     );

@@ -1,8 +1,4 @@
-import {
-    Avatar,
-    Box,
-    IconButton
-} from "@mui/material";
+import { Avatar, Box, IconButton } from "@mui/material";
 
 import NotificationsIcon from "@mui/icons-material/Notifications";
 

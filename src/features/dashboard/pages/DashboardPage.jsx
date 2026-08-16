@@ -17,9 +17,8 @@ function DashboardPage() {
     return (
         <Box
             sx={{
-                backgroundColor: "background.default",
                 minHeight: "100vh",
-                p: 4
+                p: 0.5
             }}
         >
 
@@ -33,7 +32,7 @@ function DashboardPage() {
                 </Grid>
 
 
-                <Grid size={{ xs: 12, md: 1.7 }}>
+                <Grid size={{ xs: 12, md: 1.5 }}>
                     <MetricCard
                         title="Sessions"
                         value={dashboard.totalSessions}
@@ -41,7 +40,7 @@ function DashboardPage() {
                 </Grid>
 
 
-                <Grid size={{ xs: 12, md: 3 }}>
+                <Grid size={{ xs: 12, md: 10 }}>
                     <RecentActivity
                         activities={dashboard}
                     />

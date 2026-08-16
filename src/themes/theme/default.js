@@ -89,30 +89,32 @@ const defaultColor = {
   // LIGHT PAPER & BACKGROUND
   // ============================== //
 
-  paper: '#162033',
-  backgroundDefault: '#0B1220',
+  paper: '#1A1327',
+  backgroundDefault: '#120D1B',
+  backgroundGradient: 'linear-gradient(135deg, #1A1327 0%, #120D1B 100%)',
+  
 
 
   // ==============================||
-  // PRIMARY - Blue
+  // PRIMARY - Violet / Indigo
   // ============================== //
 
-  primaryLight: '#60A5FA',
-  primary200: '#3B82F6',
-  primaryMain: '#2563EB',
-  primaryDark: '#1D4ED8',
-  primary800: '#1E40AF',
+  primaryLight: '#D9C8FF',
+  primary200: '#B89CFF',
+  primaryMain: '#7C4DFF',
+  primaryDark: '#5B3BE1',
+  primary800: '#4123B1',
 
 
   // ==============================||
-  // SECONDARY - Purple
+  // SECONDARY - Blue accent
   // ============================== //
 
-  secondaryLight: '#C4B5FD',
-  secondary200: '#A78BFA',
-  secondaryMain: '#8B5CF6',
-  secondaryDark: '#7C3AED',
-  secondary800: '#5B21B6',
+  secondaryLight: '#D9F1FF',
+  secondary200: '#A9D9FF',
+  secondaryMain: '#4EA5FF',
+  secondaryDark: '#2A76D6',
+  secondary800: '#1D4F9F',
 
 
   // ==============================||
@@ -171,21 +173,14 @@ const defaultColor = {
   // DARK THEME
   // ============================== //
 
-  darkPaper: '#162033',
-
-  darkBackground: '#080F1C',
-
-
-  darkLevel1: '#1E293B',
-
-  darkLevel2: '#172033',
-
+  darkPaper: '#212124',
+  darkBackground: '#070808',
+  darkLevel1: '#2A1F3D',
+  darkLevel2: '#20182F',
 
   // text
   darkTextTitle: '#F8FAFC',
-
   darkTextPrimary: '#E2E8F0',
-
   darkTextSecondary: '#94A3B8',
 
 
@@ -193,22 +188,22 @@ const defaultColor = {
   // DARK PRIMARY
   // ============================== //
 
-  darkPrimaryLight: '#60A5FA',
-  darkPrimaryMain: '#3B82F6',
-  darkPrimaryDark: '#2563EB',
-  darkPrimary200: '#93C5FD',
-  darkPrimary800: '#1D4ED8',
+  darkPrimaryLight: '#D9C8FF',
+  darkPrimaryMain: '#8D6BFF',
+  darkPrimaryDark: '#6A4AE5',
+  darkPrimary200: '#C9B8FF',
+  darkPrimary800: '#4E31B8',
 
 
   // ==============================||
   // DARK SECONDARY
   // ============================== //
 
-  darkSecondaryLight: '#DDD6FE',
-  darkSecondaryMain: '#8B5CF6',
-  darkSecondaryDark: '#7C3AED',
-  darkSecondary200: '#C4B5FD',
-  darkSecondary800: '#6D28D9'
+  darkSecondaryLight: '#CFEAFF',
+  darkSecondaryMain: '#63B3FF',
+  darkSecondaryDark: '#3189E6',
+  darkSecondary200: '#A8D8FF',
+  darkSecondary800: '#1E5FB4'
 
 };
 
