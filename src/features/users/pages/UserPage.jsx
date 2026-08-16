@@ -1,5 +1,5 @@
 import useUsers from "../hooks/useUsers";
-import { Box, Typography, Grid } from "@mui/material";
+import { Box, Typography, Avatar, Button, Grid, TextField, FormControl, InputLabel } from "@mui/material";
 import MetricCard from "../components/MetricCard";
 
 function UserPage() {
@@ -13,15 +13,67 @@ function UserPage() {
     }
 
     return (
-        <Box>
-            <Grid container spacing={3}></Grid>
+        <Box sx = {{
+                minHeight: "100vh",
+                p : 2, pl: 4
+            }}
+        >
+            <Grid container spacing={3}>
+                <Grid item sx = {{xs: 12, md: 12}}>
+                    <Avatar sx = {{ width: 100, height: 100, color: "", bgcolor: ""}}>
+                        
+                    </Avatar>
+                </Grid>
 
-                <Grid size={{ xs: 12, md: 1.5 }}>
-                    <MetricCard
-                        title="Users"
-                        value={users.totalUsers}
+                <Grid item sx = {{xs: 12, md: 12, mt:4}}>
+                    <Button variant="contained" size="medium" color="primary">
+                        Upload an image
+                    </Button>
+                </Grid>
+            </Grid>
+                
+                
+            <Grid container 
+                spacing={3} 
+                sx = {{
+                    mt: 7,
+                    bgcolor: "background.default",
+                }}
+            >
+                <Grid item 
+                    size={{xs: 12, md: 3}}
+                    sx = {{bgcolor: "background.paper"}}
+                >
+                    <TextField
+                        fullWidth
+                        label="Full name"
+                        color="primary"
                     />
                 </Grid>
+
+                <Grid item 
+                    size={{xs: 12, md: 4}}
+                    sx = {{bgcolor: "background.paper"}}
+                >
+                    <TextField
+                        fullWidth
+                        label="Email"
+                        color="primary"
+                    />
+                </Grid>
+                
+                <Grid item 
+                    size={{xs: 12, md: 4}}
+                    sx = {{bgcolor: "background.paper"}}
+                >
+                    <TextField
+                        fullWidth
+                        label="Address"
+                        color="primary"
+                    />
+                </Grid>
+
+            </Grid>
         </Box>
     )
 }
