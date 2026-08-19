@@ -30,8 +30,10 @@ export default function Sidebar() {
 
             <List sx={{ mt: 1.3 }}>
                 {menuItems.map((item) => (
+                
                     <ListItemButton 
-                        onClick = {() => navigate(item.path)} key={item.label}
+                        onClick = {() => navigate(item.path)} 
+                        key={item.label}
                         sx = {{
                             borderRadius: 3,
                             ml: 2,
@@ -39,7 +41,6 @@ export default function Sidebar() {
                             "&:hover": {
                                 bgcolor: "primary.dark"
                             },
-                        
                         }}
                     >
                         

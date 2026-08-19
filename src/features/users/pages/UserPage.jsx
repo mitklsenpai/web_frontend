@@ -74,6 +74,13 @@ function UserPage() {
                 </Grid>
 
             </Grid>
+
+            // Show calibration model
+            // Show calibration status
+            // Show device status
+            // Show device model
+            // Show device serial number
+
         </Box>
     )
 }

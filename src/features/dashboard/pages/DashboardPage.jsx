@@ -31,7 +31,6 @@ function DashboardPage() {
                     />
                 </Grid>
 
-
                 <Grid size={{ xs: 12, md: 1.5 }}>
                     <MetricCard
                         title="Sessions"
@@ -39,12 +38,13 @@ function DashboardPage() {
                     />
                 </Grid>
 
-
                 <Grid size={{ xs: 12, md: 10 }}>
                     <RecentActivity
                         activities={dashboard}
                     />
                 </Grid>
+
+                // Calibration status
 
             </Grid>
 
