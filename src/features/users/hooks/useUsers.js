@@ -1,25 +1,37 @@
 import { useEffect, useState } from "react";
-import { getUsers } from "../services/userService";
+import {
+    getUser,
+    updateUser,
+} from "../services/userService";
 
 export default function useUsers() {
-    const [users, setUsers] = useState(null);
+    const [user, setUser] = useState(null);
+    const [configuration, setConfiguration] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        loadUsers();
+        loadUser();
     }, []);
 
-    async function loadUsers() {
+    const loadUser = async () => {
         try {
-            const res = await getUsers();
-            setUsers(res.data);
+            const res = await getUser();
+            setUser(res.data.user);
+            setConfiguration(res.data.config);
         } finally {
             setLoading(false);
         }
-    }
+    };
+
+    const saveUser = async (data) => {
+        const res = await updateUser(user.id, data);
+        setUser(res.data);
+    };
 
     return {
-        users,
-        loading
+        user,
+        configuration,
+        loading,
+        saveUser,
     };
 }
