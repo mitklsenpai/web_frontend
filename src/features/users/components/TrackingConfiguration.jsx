@@ -19,7 +19,8 @@ export default function TrackingConfiguration({ configuration }) {
     return (
         <Card sx = {{
                 border: "1px solid",
-                borderColor: "divider"
+                borderColor: "divider",
+                height: "110%"
             }}
         >
             <CardContent>
@@ -74,7 +75,6 @@ export default function TrackingConfiguration({ configuration }) {
                     >
 
                         <TextField
-                            
                             label="Device Model"
                             name="device_model"
                             value={formData?.device_model || ""}

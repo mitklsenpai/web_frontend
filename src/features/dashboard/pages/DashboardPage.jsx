@@ -1,7 +1,9 @@
 import MetricCard from "../components/MetricCard";
 import RecentActivity from "../components/RecentActivity";
+import AttentionAlert from "../components/AttentionAlert"
 import useDashboard from "../hooks/useDashboard";
 import { Box, Typography, Grid } from "@mui/material";
+import { ChipStatus } from "@/components/common";
 
 function DashboardPage() {
 
@@ -17,36 +19,47 @@ function DashboardPage() {
     return (
         <Box
             sx={{
-                minHeight: "100vh",
-                p: 0.5
+                p: 0.5,
             }}
         >
 
             <Grid container spacing={3}>
 
-                <Grid size={{ xs: 12, md: 1.5 }}>
+                <Grid size={{ xs: 12, md: 3 }}>
                     <MetricCard
-                        title="Users"
+                        title="Sessions"
                         value={dashboard.totalUsers}
                     />
                 </Grid>
 
-                <Grid size={{ xs: 12, md: 1.5 }}>
+                <Grid size={{ xs: 12, md: 3 }}>
                     <MetricCard
-                        title="Sessions"
+                        title="Attention"
                         value={dashboard.totalSessions}
                     />
                 </Grid>
 
-                <Grid size={{ xs: 12, md: 10 }}>
-                    <RecentActivity
-                        activities={dashboard}
+                <Grid size={{ xs: 12, md: 3 }}>
+                    <MetricCard
+                        title="Calibration"
+                        value={dashboard.totalSessions}
+                        children={<ChipStatus title="Ready"/>}
+                    />
+
+                </Grid>
+
+                <Grid size={{ xs: 12, md: 3 }}>
+                    <MetricCard
+                        title="Device"
+                        value={dashboard.totalSessions}
+                        children={<ChipStatus title="Online"/>}
                     />
                 </Grid>
 
-                // Calibration status
-
             </Grid>
+
+
+            {/* <AttentionAlert/> */}
 
         </Box>
     );

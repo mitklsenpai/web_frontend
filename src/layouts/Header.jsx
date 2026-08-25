@@ -12,11 +12,11 @@ export default function Header({ title }) {
         <AppBar
             position="static"
             elevation={0}
-            color="inherit"
             sx={{
+                bgcolor: "background.paper",
                 borderBottom: "1px solid",
                 borderColor: "divider",
-                height: 60
+                height: 50
             }}
         >
             <Toolbar>
@@ -25,7 +25,6 @@ export default function Header({ title }) {
                 <Box sx={{ flexGrow: 1 }} />
 
                 <UserMenu />
-
             </Toolbar>
         </AppBar>
     );

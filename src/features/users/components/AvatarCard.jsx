@@ -1,15 +1,10 @@
 import {
     Card,
-    CardContent,
-    Grid,
     Avatar,
     Typography,
-    Stack,
-    Box,
-    Divider
 } from "@mui/material";
 
-import Status from "./Status";
+import Status from "../../../components/common/Status";
 
 function AvatarCard() {
     return (
@@ -26,7 +21,7 @@ function AvatarCard() {
             <Avatar sx={{
                     width: 200,
                     height: 200,
-                    ml: 19
+                    margin: "0 auto",
                 }}
             >
                 

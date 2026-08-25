@@ -5,12 +5,14 @@ function MetricCard({
     value,
     subtitle,
     color = "primary",
-    icon
+    icon,
+    children = null
 }) {
 
     return (
         <Card
             sx={{
+                width: 405, height: 90,
                 p: 2,
                 bgcolor: "background.paper",
                 border: "1px solid",
@@ -36,21 +38,31 @@ function MetricCard({
             </Box>
 
 
-            <Typography
-                variant="h3"
-                color={`${color}.main`}
-                mt={1}
+            <Box
+                sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between"
+                }}
             >
-                {value}
-            </Typography>
+                <Typography
+                    variant="h3"
+                    color={`${color}.main`}
+                >
+                    {value}
+                </Typography>
 
+                <Box>
+                    {children}    
+                </Box>
+            </Box>
 
             <Typography
                 variant="caption"
                 color="text.secondary"
             >
                 {subtitle}
-            </Typography>
+            </Typography>   
 
         </Card>
     );

@@ -1,10 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Drawer, Toolbar, List, ListItemButton, ListItemText} from "@mui/material";
 import Logo from "./Logo";
 
 const drawerWidth = 180;
 
 export default function Sidebar() {
+    const location = useLocation();
     const navigate = useNavigate();
 
     const menuItems = [
@@ -30,7 +31,7 @@ export default function Sidebar() {
 
             <List sx={{ mt: 1.3 }}>
                 {menuItems.map((item) => (
-                
+
                     <ListItemButton 
                         onClick = {() => navigate(item.path)} 
                         key={item.label}
@@ -38,6 +39,10 @@ export default function Sidebar() {
                             borderRadius: 3,
                             ml: 2,
                             mr: 2,
+                            bgcolor:
+                                location.pathname === item.path
+                                    ? "primary.main"
+                                    : "transparent",
                             "&:hover": {
                                 bgcolor: "primary.dark"
                             },
@@ -46,6 +51,8 @@ export default function Sidebar() {
                         
                         <ListItemText
                             primary={item.label}
+                            sx={{
+                            }}
                         />
 
                     </ListItemButton>

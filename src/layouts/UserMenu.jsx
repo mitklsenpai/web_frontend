@@ -7,7 +7,6 @@ export default function UserMenu() {
         <Box
             sx={{
                 display: "flex",
-                alignItems: "center",
                 gap: 2
             }}
         >
