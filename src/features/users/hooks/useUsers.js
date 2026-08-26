@@ -1,37 +1,26 @@
-import { useEffect, useState } from "react";
-import {
-    getUser,
-    updateUser,
-} from "../services/userService";
+import { useCallback, useState } from "react";
+import { useFetch } from "@/hooks/useFetch";
+import { getUser, updateUser } from "../services/userService";
 
 export default function useUsers() {
     const [user, setUser] = useState(null);
-    const [configuration, setConfiguration] = useState(null);
-    const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        loadUser();
+    const fetchUser = useCallback(async () => {
+        const res = await getUser();
+        return res.data;
     }, []);
 
-    const loadUser = async () => {
-        try {
-            const res = await getUser();
-            setUser(res.data.user);
-            setConfiguration(res.data.config);
-        } finally {
-            setLoading(false);
-        }
-    };
+    const { data, loading } = useFetch(fetchUser);
 
-    const saveUser = async (data) => {
-        const res = await updateUser(user.id, data);
+    // Derive user/config from fetched data, but let saveUser update user locally
+    const fetchedUser = data?.user ?? null;
+    const configuration = data?.config ?? null;
+    const activeUser = user ?? fetchedUser;
+
+    const saveUser = async (updates) => {
+        const res = await updateUser(activeUser.id, updates);
         setUser(res.data);
     };
 
-    return {
-        user,
-        configuration,
-        loading,
-        saveUser,
-    };
+    return { user: activeUser, configuration, loading, saveUser };
 }

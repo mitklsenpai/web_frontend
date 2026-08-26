@@ -6,6 +6,7 @@ const userRoutes = [
         element: <UserPage />,
         handle: {
             title: "Users",
+            nav: { label: "Users" }
         }
     }
 ];

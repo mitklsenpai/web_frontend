@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 
 function Status({ status = "Online" }) {
-    const isOnline = status === "Online" || "Active";
+    const isOnline = ["Online", "Ready", "Active"].includes(status);
 
     return (
         <Box sx = {{display: "flex", alignItems: "center", gap: 1}}>

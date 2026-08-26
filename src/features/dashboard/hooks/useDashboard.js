@@ -1,25 +1,14 @@
-import { useEffect, useState } from "react";
+import { useCallback } from "react";
+import { useFetch } from "@/hooks/useFetch";
 import { getDashboard } from "../services/dashboardService";
 
 export default function useDashboard() {
-    const [dashboard, setDashboard] = useState(null);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        loadDashboard();
+    const fetchDashboard = useCallback(async () => {
+        const res = await getDashboard();
+        return res.data;
     }, []);
 
-    async function loadDashboard() {
-        try {
-            const res = await getDashboard();
-            setDashboard(res.data);
-        } finally {
-            setLoading(false);
-        }
-    }
+    const { data: dashboard, loading } = useFetch(fetchDashboard);
 
-    return {
-        dashboard,
-        loading
-    };
+    return { dashboard, loading };
 }

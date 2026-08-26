@@ -6,6 +6,7 @@ const dashboardRoutes = [
         element: <DashboardPage />,
         handle: {
             title: "Dashboard",
+            nav: { label: "Dashboard" }
         }
     }
 ];

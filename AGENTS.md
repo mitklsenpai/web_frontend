@@ -26,15 +26,19 @@ There is no test, typecheck, or format command. Do not assume one exists.
 
 **Feature-sliced**: each feature in `src/features/<name>/` is self-contained with its own `routes.jsx`, `pages/`, `components/`, `hooks/`, and `services/`.
 
-**Route composition**: feature modules export route arrays from `routes.jsx`, which are spread into the central router at `src/routes/index.jsx`. All routes are children of `AdminLayout`.
+**Route composition**: feature modules export route arrays from `routes.jsx`. All feature routes are registered in `src/routes/config.js` (central route registry). The router at `src/routes/index.jsx` and `Sidebar.jsx` both import from `config.js`. All routes are children of `AdminLayout`.
 
 **Adding a new feature**:
 1. Create `src/features/<name>/` with `index.js` (export route array), `routes.jsx`, `pages/`, `components/`, `hooks/`, `services/` as needed
-2. Import and spread the route array in `src/routes/index.jsx`
-3. Add nav entry in `src/layouts/Sidebar.jsx` `menuItems` array
+2. Add `nav: { label: "..." }` to the route's `handle` object in `routes.jsx`
+3. Import and spread the route array in `src/routes/config.js`
 
 **Implemented features**: `dashboard`, `users`
 **Planned (detail.md stubs only)**: `calibration`, `gaze-estimate`, `my-analytics`, `reports`, `test-session`
+
+## Data Fetching
+
+Shared `useFetch(fetchFn)` hook at `src/hooks/useFetch.js` — calls `fetchFn` once on mount, returns `{ data, loading, error, refetch }`. Feature hooks wrap their service calls in `useCallback` and pass to `useFetch`.
 
 ## API
 
@@ -47,11 +51,10 @@ Dark violet/indigo palette defined in `src/themes/theme/default.js`. MUI compone
 ## State
 
 - App config (font, border radius, color preset) persisted to localStorage via `ConfigContext` (`src/contexts/ConfigContext.jsx`)
-- Feature-level data fetching via custom hooks (e.g. `useDashboard`, `useUsers`)
+- Feature-level data fetching via `useFetch` hook (e.g. `useDashboard`, `useUsers`)
 
 ## Gotchas
 
-- `src/pages/` contains empty placeholder files (Home, Login, Signup, etc.) - not yet implemented
-- `src/lib/fetch.js`, `src/hooks/useFetch.js`, `src/contexts/AnalyticsContext.js` are empty placeholders
 - MUI v9 `Grid` uses `size` prop instead of `xs`/`md` on `item` - see existing pages for the pattern
 - Route page titles are set via `handle: { title: "..." }` on route objects, consumed by `AdminLayout` via `useMatches()`
+- Route nav items are set via `handle: { nav: { label: "..." } }` on route objects, consumed by `Sidebar` via `getNavItems()`

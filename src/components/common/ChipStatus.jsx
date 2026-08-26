@@ -1,7 +1,7 @@
 import {Chip, Box} from "@mui/material";
 
 function ChipStatus({title}) {
-    const canBlink = title === "Online" || "Ready";
+    const canBlink = ["Online", "Ready"].includes(title);
 
     return (
         <Chip 
