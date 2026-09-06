@@ -12,18 +12,20 @@ function MetricCard({
     return (
         <Card
             sx={{
-                width: 405, height: 90,
                 p: 2,
                 bgcolor: "background.paper",
                 border: "1px solid",
-                borderColor: "divider"
+                borderColor: "divider",
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
             }}
         >
 
             <Box
                 sx={{
                     display: "flex",
-                    alignitems: "center",
+                    alignItems: "center",
                     gap: 1
                 }}
             >
@@ -52,9 +54,7 @@ function MetricCard({
                     {value}
                 </Typography>
 
-                <Box>
-                    {children}    
-                </Box>
+                {children}    
             </Box>
 
             <Typography

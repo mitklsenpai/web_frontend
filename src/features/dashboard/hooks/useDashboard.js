@@ -10,5 +10,9 @@ export default function useDashboard() {
 
     const { data: dashboard, loading } = useFetch(fetchDashboard);
 
-    return { dashboard, loading };
+    return {
+        dashboard,
+        loading,
+        activities: dashboard?.recentActivities ?? []
+    };
 }

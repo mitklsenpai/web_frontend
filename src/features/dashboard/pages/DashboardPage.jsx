@@ -1,15 +1,16 @@
 import MetricCard from "../components/MetricCard";
 import RecentActivity from "../components/RecentActivity";
-import AttentionAlert from "../components/AttentionAlert"
+import AttentionTrendCard from "../components/AttentionTrendCard";
 import useDashboard from "../hooks/useDashboard";
-import { Box, Typography, Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { ChipStatus } from "@/components/common";
 
 function DashboardPage() {
 
     const {
         dashboard,
-        loading
+        loading,
+        activities
     } = useDashboard();
 
     if (loading) {
@@ -28,21 +29,21 @@ function DashboardPage() {
                 <Grid size={{ xs: 12, md: 3 }}>
                     <MetricCard
                         title="Sessions"
-                        value={dashboard.totalUsers}
+                        value={dashboard.totalSessions}
                     />
                 </Grid>
 
                 <Grid size={{ xs: 12, md: 3 }}>
                     <MetricCard
                         title="Attention"
-                        value={dashboard.totalSessions}
+                        value={`${dashboard.attentionRate}%`}
                     />
                 </Grid>
 
                 <Grid size={{ xs: 12, md: 3 }}>
                     <MetricCard
                         title="Calibration"
-                        value={dashboard.totalSessions}
+                        value={`${dashboard.calibrationAccuracy}%`}
                         children={<ChipStatus title="Ready"/>}
                     />
 
@@ -51,15 +52,20 @@ function DashboardPage() {
                 <Grid size={{ xs: 12, md: 3 }}>
                     <MetricCard
                         title="Device"
-                        value={dashboard.totalSessions}
+                        value={dashboard.activeDevices}
                         children={<ChipStatus title="Online"/>}
                     />
                 </Grid>
 
+                <Grid size={12}>
+                    <AttentionTrendCard />
+                </Grid>
+
+                <Grid size={12}>
+                    <RecentActivity activities={activities} />
+                </Grid>
+
             </Grid>
-
-
-            {/* <AttentionAlert/> */}
 
         </Box>
     );

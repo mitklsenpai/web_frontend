@@ -29,7 +29,7 @@ There is no test, typecheck, or format command. Do not assume one exists.
 **Route composition**: feature modules export route arrays from `routes.jsx`. All feature routes are registered in `src/routes/config.js` (central route registry). The router at `src/routes/index.jsx` and `Sidebar.jsx` both import from `config.js`. All routes are children of `AdminLayout`.
 
 **Adding a new feature**:
-1. Create `src/features/<name>/` with `index.js` (export route array), `routes.jsx`, `pages/`, `components/`, `hooks/`, `services/` as needed
+1. Create `src/features/<name>/` with `index.js` (export route array), `routes.jsx`, `pages/`, `components/`, `hooks/`, `services/`, `constants/` (for shared enums/data contracts) as needed
 2. Add `nav: { label: "..." }` to the route's `handle` object in `routes.jsx`
 3. Import and spread the route array in `src/routes/config.js`
 
@@ -56,5 +56,6 @@ Dark violet/indigo palette defined in `src/themes/theme/default.js`. MUI compone
 ## Gotchas
 
 - MUI v9 `Grid` uses `size` prop instead of `xs`/`md` on `item` - see existing pages for the pattern
+- MUI v9 `slotProps` - use it instead of legacy props like `inputProps`/`primaryTypographyProps`. Passing legacy Typography props to `ListItemText` (e.g. `primaryTypographyProps`) leaks the prop name onto the DOM element and fires a React warning; use `slotProps={{ primary: { ... } }}`
 - Route page titles are set via `handle: { title: "..." }` on route objects, consumed by `AdminLayout` via `useMatches()`
 - Route nav items are set via `handle: { nav: { label: "..." } }` on route objects, consumed by `Sidebar` via `getNavItems()`

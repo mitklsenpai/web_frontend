@@ -11,7 +11,7 @@ Two features are implemented (Dashboard, Users) with mock data. Five more featur
 ### Implemented and Working
 
 - App shell with sidebar navigation and header
-- Dashboard with metric cards (Sessions, Attention, Calibration, Device)
+- Dashboard with metric cards (Sessions, Attention, Calibration, Device), an attention-trend line chart, and a recent-activity feed
 - User profile page with edit capability, avatar, and tracking configuration display
 - Full MUI theme system with dark violet/indigo palette
 - Config persistence to localStorage
@@ -20,7 +20,7 @@ Two features are implemented (Dashboard, Users) with mock data. Five more featur
 
 ### Mock / Not Yet Connected to Backend
 
-- `dashboardService.js` — Returns hardcoded `{ totalUsers: 120, totalSessions: 58 }`
+- `dashboardService.js` — Returns hardcoded metric values (`totalUsers`, `totalSessions`, `attentionRate`, `calibrationAccuracy`, `activeDevices`) and a `recentActivities` list
 - `userService.js` — Returns hardcoded user data and device configuration
 
 ### Planned (Empty Stubs)
@@ -73,7 +73,7 @@ For mutations (create/update), keep the async function in the feature hook and c
 1. Create `src/features/<name>/` directory
 2. Create `index.js` exporting route array
 3. Create `routes.jsx` with route definitions including `handle: { title: "...", nav: { label: "..." } }`
-4. Create `pages/`, `components/`, `hooks/`, `services/` as needed
+4. Create `pages/`, `components/`, `hooks/`, `services/`, and `constants/` (for shared enums/data contracts) as needed
 5. Import and spread route array in `src/routes/config.js`
 
 Sidebar nav is automatically derived from route `handle.nav` — no manual sidebar edits needed.
@@ -101,5 +101,4 @@ No test command is configured. Test files exist in `__tests__/` directories but 
 
 - `TrackingConfiguration` has a typo: field name `caibration_type` (missing 'l')
 - `AvatarCard` has a hardcoded user name
-- `MetricCard` has a fixed `width: 405` which may not be responsive
 - Services return mock data — real API integration is pending

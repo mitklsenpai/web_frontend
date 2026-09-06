@@ -93,15 +93,27 @@ features/<name>/
   components/       Feature-specific components
   hooks/            Feature-specific hooks
   services/         API/data layer
+  constants/        Shared enums/data contracts (e.g. activityTypes)
 ```
 
 Features own their own data fetching via custom hooks that use the shared `useFetch` hook. Services use the shared Axios instance from `src/services/api.js`.
+
+### Feature Constants & Domain Enums
+
+Domain enums live in each feature's `constants/` dir and are shared by both the service layer (so mock/API data can never drift from component expectations) and feature components.
+
+The dashboard defines the activity model used by the recent-activity feed and the five planned features:
+
+- **Activity types** — named `GROUP_ACTION` in `src/features/dashboard/constants/activityTypes.js`. Groups: `SESSION`, `CALIBRATION`, `TRACKING`, `DEVICE`, `ANALYSIS`, `REPORT`, `PROFILE`, `MODEL` (e.g. `CALIBRATION_COMPLETED`, `DEVICE_ERROR`).
+- **Activity item schema** — `{ id, date, type, detail, status }`.
+- **Status → chip colour** mapping: `Completed`→success, `Failed`→error, `Warning`→warning, `Running`/`Pending`→info.
+- **Display mapping** — components derive icon/colour from the type's group prefix (first `_`-separated segment) via a `typeConfig` map; profile-subtypes `AVATAR_*`/`PASSWORD_*` alias the `PROFILE` config; unknown groups fall back to the `SESSION` config.
 
 ### Implemented Features
 
 | Feature | Routes | Description |
 |---------|--------|-------------|
-| `dashboard` | `/` | Metric cards (Sessions, Attention, Calibration, Device) |
+| `dashboard` | `/` | Metric cards (Sessions, Attention, Calibration, Device), attention-trend line chart, recent-activity feed |
 | `users` | `/user` | User profile, avatar card, tracking configuration |
 
 ### Planned Features (detail.md stubs only)
@@ -190,4 +202,12 @@ This project uses MUI v9 Grid which uses `size` prop instead of `xs`/`md` on Gri
 
 ```jsx
 <Grid size={{ xs: 12, md: 4 }}>  // not xs={12} md={4}
+```
+
+## MUI v9 `slotProps`
+
+Prefer `slotProps` over legacy props for component-level customization. Legacy prop names (e.g. `ListItemText`'s `primaryTypographyProps`) are no longer consumed and leak their name onto the DOM element, firing a React warning:
+
+```jsx
+<ListItemText slotProps={{ primary: { pr: 10 } }} />  // not primaryTypographyProps={{ pr: 10 }}
 ```
