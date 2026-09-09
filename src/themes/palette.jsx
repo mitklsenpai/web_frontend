@@ -68,9 +68,11 @@ export function buildPalette(presetColor) {
       900: colors.darkPaper
     },
     text: {
+      light: colors.grey50,
       primary: colors.grey700,
       secondary: colors.grey500,
       dark: colors.grey900,
+      chart: colors.grey300,
       hint: colors.grey100,
       heading: colors.grey900
     },

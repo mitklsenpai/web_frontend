@@ -1,128 +1,124 @@
-// ==============================|| DEFAULT THEME COLORS ||============================== //
+// ==============================|| SOLARIZED DARK THEME COLORS ||============================== //
 
 const defaultColor = {
 
   // ==============================||
-  // LIGHT PAPER & BACKGROUND
+  // PAPER & BACKGROUND
   // ============================== //
 
-  paper: '#1A1327',
-  backgroundDefault: '#120D1B',
-  backgroundGradient: 'linear-gradient(135deg, #1A1327 0%, #120D1B 100%)',
-  
+  paper: '#073642',
+  backgroundDefault: '#002B36',
+  backgroundGradient: 'linear-gradient(135deg, #073642 0%, #002B36 100%)',
 
 
   // ==============================||
-  // PRIMARY - Violet / Indigo
+  // PRIMARY - Solarized Blue
   // ============================== //
 
-  primaryLight: '#D9C8FF',
-  primary200: '#B89CFF',
-  primaryMain: '#7C4DFF',
-  primaryDark: '#5B3BE1',
-  primary800: '#4123B1',
+  primaryLight: '#5FAFE0',
+  primary200: '#3FA0D8',
+  primaryMain: '#268BD2',
+  primaryDark: '#1E6FA8',
+  primary800: '#15527F',
 
 
   // ==============================||
-  // SECONDARY - Blue accent
+  // SECONDARY - Solarized Cyan
   // ============================== //
 
-  secondaryLight: '#D9F1FF',
-  secondary200: '#A9D9FF',
-  secondaryMain: '#4EA5FF',
-  secondaryDark: '#2A76D6',
-  secondary800: '#1D4F9F',
+  secondaryLight: '#55C0B8',
+  secondary200: '#3AAEA5',
+  secondaryMain: '#2AA198',
+  secondaryDark: '#218178',
+  secondary800: '#175C57',
 
 
   // ==============================||
-  // SUCCESS - Green
+  // ERROR - Solarized Red
   // ============================== //
 
-  successLight: '#86EFAC',
-  success200: '#4ADE80',
-  successMain: '#22C55E',
-  successDark: '#16A34A',
+  errorLight: '#EF807E',
+  errorMain: '#DC322F',
+  errorDark: '#A92523',
 
 
   // ==============================||
-  // ERROR - Red
+  // ORANGE - Solarized Orange
   // ============================== //
 
-  errorLight: '#FCA5A5',
-  errorMain: '#EF4444',
-  errorDark: '#B91C1C',
+  orangeLight: '#E28B67',
+  orangeMain: '#CB4B16',
+  orangeDark: '#9A390F',
 
 
   // ==============================||
-  // ORANGE
+  // WARNING - Solarized Yellow
   // ============================== //
 
-  orangeLight: '#FDBA74',
-  orangeMain: '#F97316',
-  orangeDark: '#C2410C',
+  warningLight: '#fff8e1',
+  warningMain: '#ffe57f',
+  warningDark: '#ffc107',
 
 
   // ==============================||
-  // WARNING - Yellow
+  // SUCCESS - Solarized Green
   // ============================== //
 
-  warningLight: '#FDE68A',
-  warningMain: '#EAB308',
-  warningDark: '#CA8A04',
+  successLight: '#b9f6ca',
+  success200: '#69f0ae',
+  successMain: '#00e676',
+  successDark: '#00c853',
 
 
   // ==============================||
   // GREY / TEXT
   // ============================== //
 
-  grey50: '#F8FAFC',
-  grey100: '#E2E8F0',
-  grey200: '#CBD5E1',
-  grey300: '#94A3B8',
-
-  grey500: '#64748B',
-  grey600: '#475569',
-  grey700: '#334155',
-  grey900: '#F1F5F9',
+  grey50: '#bddadd',
+  grey100: '#D6D0BF',
+  grey200: '#B8B3A5',
+  grey300: '#839496',
+  grey500: '#586E75',
+  grey600: '#465A60',
+  grey700: '#34454A',
+  grey900: '#FDF6E3',
 
 
   // ==============================||
   // DARK THEME
   // ============================== //
 
-  darkPaper: '#212124',
-  darkBackground: '#070808',
-  darkLevel1: '#2A1F3D',
-  darkLevel2: '#20182F',
+  darkPaper: '#073642',
+  darkBackground: '#002B36',
+  darkLevel1: '#0A3A46',
+  darkLevel2: '#06313B',
 
-  // text
-  darkTextTitle: '#F8FAFC',
-  darkTextPrimary: '#E2E8F0',
-  darkTextSecondary: '#94A3B8',
+  darkTextTitle: '#EEE8D5',
+  darkTextPrimary: '#839496',
+  darkTextSecondary: '#586E75',
 
 
   // ==============================||
   // DARK PRIMARY
   // ============================== //
 
-  darkPrimaryLight: '#D9C8FF',
-  darkPrimaryMain: '#8D6BFF',
-  darkPrimaryDark: '#6A4AE5',
-  darkPrimary200: '#C9B8FF',
-  darkPrimary800: '#4E31B8',
+  darkPrimaryLight: '#5FAFE0',
+  darkPrimaryMain: '#268BD2',
+  darkPrimaryDark: '#1E6FA8',
+  darkPrimary200: '#3FA0D8',
+  darkPrimary800: '#15527F',
 
 
   // ==============================||
   // DARK SECONDARY
   // ============================== //
 
-  darkSecondaryLight: '#CFEAFF',
-  darkSecondaryMain: '#63B3FF',
-  darkSecondaryDark: '#3189E6',
-  darkSecondary200: '#A8D8FF',
-  darkSecondary800: '#1E5FB4'
+  darkSecondaryLight: '#55C0B8',
+  darkSecondaryMain: '#2AA198',
+  darkSecondaryDark: '#218178',
+  darkSecondary200: '#3AAEA5',
+  darkSecondary800: '#175C57'
 
 };
-
 
 export default defaultColor;
