@@ -74,7 +74,7 @@ const defaultColor = {
   // GREY / TEXT
   // ============================== //
 
-  grey50: '#bddadd',
+  grey50: '#FDF6E3',
   grey100: '#D6D0BF',
   grey200: '#B8B3A5',
   grey300: '#839496',

@@ -1,6 +1,7 @@
 import MetricCard from "../components/MetricCard";
 import RecentActivity from "../components/RecentActivity";
 import AttentionTrendCard from "../components/AttentionTrendCard";
+import DeviceCard from "../components/DeviceCard";
 import useDashboard from "../hooks/useDashboard";
 import { Box, Grid } from "@mui/material";
 import { ChipStatus } from "@/components/common";
@@ -44,7 +45,7 @@ function DashboardPage() {
                     <MetricCard
                         title="Calibration"
                         value={`${dashboard.calibrationAccuracy}%`}
-                        children={<ChipStatus title="Ready"/>}
+                        children={<ChipStatus title="Offline"/>}
                     />
 
                 </Grid>
@@ -57,11 +58,15 @@ function DashboardPage() {
                     />
                 </Grid>
 
-                <Grid size={12}>
+                <Grid size={{ xs: 12, md: 9 }}>
                     <AttentionTrendCard />
                 </Grid>
 
-                <Grid size={12}>
+                <Grid size={{ xs: 12, md: 3 }}>
+                    <DeviceCard />
+                </Grid>
+
+                <Grid size={{ xs: 12, md: 12 }}>
                     <RecentActivity activities={activities} />
                 </Grid>
 

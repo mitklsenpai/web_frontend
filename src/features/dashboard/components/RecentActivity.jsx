@@ -60,13 +60,13 @@ function RecentActivity({ activities = [] }) {
                 borderColor: "divider"
             }}
         >
-            <Typography variant="h6" gutterBottom>
-                Hoạt động gần đây
+            <Typography variant="h3" gutterBottom>
+                Recent Activities
             </Typography>
 
             {sorted.length === 0 ? (
                 <Typography variant="body2" color="text.secondary">
-                    Chưa có hoạt động nào
+                    No recent activities to display
                 </Typography>
             ) : (
                 <List disablePadding>

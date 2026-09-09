@@ -4,7 +4,6 @@ function MetricCard({
     title,
     value,
     subtitle,
-    color = "primary",
     icon,
     children = null
 }) {
@@ -33,7 +32,7 @@ function MetricCard({
 
                 <Typography
                     variant="caption"
-                    color="text.secondary"
+                    sx = {{ color: "text.secondary"}}
                 >
                     {title}
                 </Typography>
@@ -49,7 +48,7 @@ function MetricCard({
             >
                 <Typography
                     variant="h3"
-                    color={`${color}.main`}
+                    sx = {{ color: "text.light" }}
                 >
                     {value}
                 </Typography>
@@ -59,7 +58,7 @@ function MetricCard({
 
             <Typography
                 variant="caption"
-                color="text.secondary"
+                sx = {{ color: "text.secondary" }}
             >
                 {subtitle}
             </Typography>   

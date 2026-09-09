@@ -1,7 +1,7 @@
 import {Chip, Box} from "@mui/material";
 
 function ChipStatus({title}) {
-    const canBlink = ["Online", "Ready"].includes(title);
+    const isReady = ["Online", "Ready"].includes(title);
 
     return (
         <Chip 
@@ -12,16 +12,15 @@ function ChipStatus({title}) {
                         width: 8,
                         height: 8,
                         borderRadius: "50%",
-                        bgcolor: canBlink ? "success.main" : "error.main",
-                        animation: canBlink
-                            ? "blink 0.8s infinite"
-                            : "none",
+                        bgcolor: isReady ? "success.dark" : "error.dark",
+                        animation:
+                            "blink 0.8s infinite"
                     }}
                 />
             }
             sx={{
-                bgcolor: "primary.main",
-                color: "text.heading",
+                bgcolor: isReady ? "success.light" : "error.light",
+                color: isReady ? "text.secondary" : "text.primary",
                 "@keyframes blink": {
                     "0%, 100%": {
                         opacity: 1,
