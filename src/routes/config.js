@@ -1,5 +1,6 @@
 import { dashboardRoutes } from "@/features/dashboard";
 import { userRoutes } from "@/features/users";
+import { calibrationRoutes } from "@/features/calibration";
 
 // ==============================|| ROUTES - CONFIG ||============================== //
 
@@ -7,7 +8,8 @@ import { userRoutes } from "@/features/users";
 // Add new feature routes here — both the router and Sidebar consume this array.
 const appRoutes = [
     ...dashboardRoutes,
-    ...userRoutes
+    ...userRoutes,
+    ...calibrationRoutes
 ];
 
 export default appRoutes;
