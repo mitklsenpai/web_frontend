@@ -3,6 +3,7 @@ import { Card, Typography, Box } from "@mui/material";
 function MetricCard({
     title,
     value,
+    color = "text.light",
     subtitle,
     icon,
     children = null
@@ -48,7 +49,7 @@ function MetricCard({
             >
                 <Typography
                     variant="h3"
-                    sx = {{ color: "text.light" }}
+                    sx = {{ color: color }}
                 >
                     {value}
                 </Typography>

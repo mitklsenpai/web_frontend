@@ -1,6 +1,19 @@
+import { useNavigate } from "react-router-dom";
 import { Stack, Box, Card, Chip, Button, Typography } from "@mui/material"
+import { getStatusColor } from "../../../utils/statusColorUtils"
+// ==============
+// MOCK DATA
+// ==============
+const accuracy = 80
+
+
+const threshholds = [{
+    "success": 90,
+    "warning": 80,
+}]
 
 export default function CurrentCard() {
+    const navigate = useNavigate();
     return (
         <Card sx={{
                 border: "1px solid",
@@ -33,11 +46,11 @@ export default function CurrentCard() {
                     <Box 
                         component="span" 
                         sx={{ 
-                            color: "success.main",
+                            color: getStatusColor(accuracy, threshholds),
                             ml: 0.5
                         }}
                     >
-                        95.9%
+                        {accuracy}%
                     </Box>
                 </Typography>
 
@@ -70,6 +83,7 @@ export default function CurrentCard() {
                     bgcolor: "primary.main",
                     color: "text.light"
                 }}
+                onClick={ () => { navigate("/calibration/start") }}
             >
                 Start Calibration
             </Button>

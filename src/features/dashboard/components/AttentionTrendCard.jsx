@@ -42,16 +42,14 @@ export default function AttentionTrendCard() {
       <Box sx={{ width: '100%', height: 320 }}>
         <LineChart
           hideLegend
-          sx={{
-            // 1. Màu đường kẻ trục X, Y và các vạch chia (ticks)
+          sx={(theme) => ({
             '& .MuiChartsAxis-line, & .MuiChartsAxis-tick': {
-              stroke: (theme) => theme.palette.text.light,
+              stroke: theme.palette.text.secondary,
             },
-            // 2. Màu chữ số/nhãn trên trục X và Y (Mon, Tue..., 50, 60...)
             '& .MuiChartsAxis-tickLabel': {
-              fill: (theme) => theme.palette.text.light,
+              fill: theme.palette.text.light,
             },
-          }}
+          })}
 
           series={[
             { data: attention, label: 'Attention', color: legendColors.attention },
@@ -62,6 +60,7 @@ export default function AttentionTrendCard() {
           margin={margin}
         />
       </Box>
+
     </Card>
   );
 }

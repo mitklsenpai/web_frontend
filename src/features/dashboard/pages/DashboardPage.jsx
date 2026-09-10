@@ -5,6 +5,12 @@ import DeviceCard from "../components/DeviceCard";
 import useDashboard from "../hooks/useDashboard";
 import { Box, Grid } from "@mui/material";
 import { ChipStatus } from "@/components/common";
+import { getStatusColor } from "../../../utils/statusColorUtils"
+
+const calirationThreshholds = [{
+    "success": 90,
+    "warning": 80,
+}]
 
 function DashboardPage() {
 
@@ -45,6 +51,9 @@ function DashboardPage() {
                     <MetricCard
                         title="Calibration"
                         value={`${dashboard.calibrationAccuracy}%`}
+                        color={() => 
+                            getStatusColor(dashboard.calibrationAccuracy, calirationThreshholds)
+                        }
                         children={<ChipStatus title="Offline"/>}
                     />
 
