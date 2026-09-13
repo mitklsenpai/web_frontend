@@ -29,14 +29,14 @@ export default function Sidebar() {
             <List sx={{ mt: 1.3 }}>
                 {menuItems.map((item) => (
                     <ListItemButton
-                        onClick={() => navigate(item.path)}
+                        onClick={() => { navigate(item.path) }}
                         key={item.label}
                         sx={{
                             borderRadius: 3,
                             ml: 2,
                             mr: 2,
                             bgcolor:
-                                location.pathname === item.path
+                                location.pathname.split("/")[1] === item.path.split("/")[1]
                                     ? "primary.main"
                                     : "transparent",
                             "&:hover": {

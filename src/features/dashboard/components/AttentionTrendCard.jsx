@@ -26,14 +26,14 @@ export default function AttentionTrendCard() {
       <Stack direction="row" spacing={2} sx={{ justifyContent: 'flex-end', mb: 1.5 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: legendColors.attention }}>
           <Box component="span" sx={{ width: 12, height: 3, borderRadius: 999, bgcolor: legendColors.attention, display: 'inline-block' }} />
-          <Typography variant="caption" sx={{ color: legendColors.attention, fontWeight: 600 }}>
+          <Typography variant="caption" sx={{ color: 'text.light', fontWeight: 600 }}>
             Attention
           </Typography>
         </Box>
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: legendColors.baseline }}>
           <Box component="span" sx={{ width: 12, height: 3, borderRadius: 999, bgcolor: legendColors.baseline, display: 'inline-block' }} />
-          <Typography variant="caption" sx={{ color: legendColors.baseline, fontWeight: 600 }}>
+          <Typography variant="caption" sx={{ color: 'text.light', fontWeight: 600 }}>
             Baseline
           </Typography>
         </Box>
@@ -43,11 +43,11 @@ export default function AttentionTrendCard() {
         <LineChart
           hideLegend
           sx={(theme) => ({
-            '& .MuiChartsAxis-line, & .MuiChartsAxis-tick': {
-              stroke: theme.palette.text.secondary,
+            '&& .MuiChartsAxis-line, && .MuiChartsAxis-tick': {
+              stroke: theme.palette.text.chart
             },
-            '& .MuiChartsAxis-tickLabel': {
-              fill: theme.palette.text.light,
+            '&& .MuiChartsAxis-tickLabel': {
+              fill: theme.palette.text.dark
             },
           })}
 

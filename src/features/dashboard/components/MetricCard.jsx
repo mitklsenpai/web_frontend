@@ -13,12 +13,9 @@ function MetricCard({
         <Card
             sx={{
                 p: 2,
-                bgcolor: "background.paper",
                 border: "1px solid",
                 borderColor: "divider",
                 height: "100%",
-                display: "flex",
-                flexDirection: "column",
             }}
         >
 

@@ -71,9 +71,9 @@ export function buildPalette(presetColor) {
       light: colors.grey50,
       primary: colors.grey700,
       secondary: colors.grey500,
-      dark: colors.grey900,
+      dark: colors.grey100,
       chart: colors.grey300,
-      hint: colors.grey100,
+      hint: colors.grey200,
       heading: colors.grey900
     },
     divider: colors.grey200,

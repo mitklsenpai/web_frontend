@@ -17,23 +17,28 @@ export default function DeviceCard () {
                 sx = {{ px: 3, color: "text.light" }}
             >
     
-                <Typography variant="body1" gutterBottom>
+                <Typography variant="body1" >
                     Device Model: ESP 3200
                 </Typography>
 
-                <Typography variant="body1" gutterBottom>
+                <Typography variant="body1" >
                     Current FPS: 30
                 </Typography>
 
-                <Typography variant="body1" gutterBottom>
-                    Status: {
-                        <Chip
-                            label= "Connected"
-                            size="small"
-                            color={"success"} variant="outlined"
-                        />
-                    }
-                </Typography>
+                <Stack direction="row" spacing={0.5}>
+                    <Typography variant="body1">
+                        Status:
+                    </Typography>
+                    <Chip
+                        label="Connected"
+                        size="small"
+                        variant="outlined"
+                        sx={{
+                            color: "success.main",
+                            borderColor: "success.main"
+                        }}
+                    />
+                </Stack>
 
             </Stack>
         </Card>

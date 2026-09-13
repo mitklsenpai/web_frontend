@@ -81,7 +81,7 @@ const defaultColor = {
   grey500: '#586E75',
   grey600: '#465A60',
   grey700: '#34454A',
-  grey900: '#FDF6E3',
+  grey900: '#fdece3',
 
 
   // ==============================||

@@ -46,7 +46,6 @@ function UserPage() {
 
                 <Grid 
                     size={{ xs: 12, md: 12 }}
-                    sx={{ mt: 5 }}
                 >
                     <TrackingConfiguration
                         configuration={configuration}

@@ -30,7 +30,7 @@ function AvatarCard() {
             <Typography 
                 variant="h3" 
                 sx={{
-                    color: "text.secondary", 
+                    color: "text.light", 
                     mt: 4,
                     mb: 1
                 }}

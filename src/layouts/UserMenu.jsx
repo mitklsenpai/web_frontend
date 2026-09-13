@@ -15,7 +15,7 @@ export default function UserMenu() {
             </IconButton>
 
             <Avatar sx={{ bgcolor: "primary.dark" }}>
-                <Typography variant="h3" sx = {{ color: "text.dark" }}>
+                <Typography variant="h3" sx = {{ color: "text.light" }}>
                     A
                 </Typography>
             </Avatar>
