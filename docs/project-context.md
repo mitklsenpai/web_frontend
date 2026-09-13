@@ -6,14 +6,16 @@ An **Eye Tracker** admin dashboard — a web frontend for managing eye tracking 
 
 ## Current State
 
-Two features are implemented (Dashboard, Users) with mock data. Five more features are planned but only have `detail.md` stubs.
+Three features are implemented (Dashboard, Users, Calibration) with mock data. Four more features are planned but only have `detail.md` stubs.
 
 ### Implemented and Working
 
 - App shell with sidebar navigation and header
 - Dashboard with metric cards (Sessions, Attention, Calibration, Device), an attention-trend line chart, and a recent-activity feed
 - User profile page with edit capability, avatar, and tracking configuration display
-- Full MUI theme system with dark violet/indigo palette
+- Calibration flow: overview → process → result, with accuracy/point-error/model display
+- Shared `getStatusColor` utility for coloring accuracy values by threshold
+- Full MUI theme system with solarized dark palette
 - Config persistence to localStorage
 - Shared `useFetch` hook for data fetching
 - Sidebar nav derived from route config (not hardcoded)
@@ -22,10 +24,10 @@ Two features are implemented (Dashboard, Users) with mock data. Five more featur
 
 - `dashboardService.js` — Returns hardcoded metric values (`totalUsers`, `totalSessions`, `attentionRate`, `calibrationAccuracy`, `activeDevices`) and a `recentActivities` list
 - `userService.js` — Returns hardcoded user data and device configuration
+- `calibrationService.js` — Returns hardcoded `currentCalibration` and `calibrationResult` payloads
 
 ### Planned (Empty Stubs)
 
-- `calibration` — Calibration type selection and accuracy display
 - `gaze-estimate`
 - `my-analytics`
 - `reports`
@@ -80,7 +82,7 @@ Sidebar nav is automatically derived from route `handle.nav` — no manual sideb
 
 ### Theme Customization
 
-To change colors: edit `src/themes/theme/default.js` (color tokens) and `src/themes/palette.jsx` (palette mapping).
+To change colors: edit `src/themes/theme/default.js` (solarized dark color tokens) and `src/themes/palette.jsx` (palette mapping).
 
 To override MUI components: add/modify files in `src/themes/overrides/` and register in `src/themes/overrides/index.js`.
 
@@ -101,4 +103,5 @@ No test command is configured. Test files exist in `__tests__/` directories but 
 
 - `TrackingConfiguration` has a typo: field name `caibration_type` (missing 'l')
 - `AvatarCard` has a hardcoded user name
+- `CalibrationProcess` is a stub — no actual calibration workflow yet
 - Services return mock data — real API integration is pending

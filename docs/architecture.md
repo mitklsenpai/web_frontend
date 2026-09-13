@@ -32,7 +32,7 @@ src/
   contexts/                 React contexts (ConfigContext)
   services/                 Shared API client (Axios instance)
   themes/                   MUI theme system (palette, typography, overrides)
-  utils/                    Utility functions (colorUtils)
+  utils/                    Utility functions (colorUtils, statusColorUtils)
 ```
 
 ## Routing
@@ -43,10 +43,12 @@ Central router at `src/routes/index.jsx` uses `createBrowserRouter`. All routes 
 // src/routes/config.js
 import { dashboardRoutes } from "@/features/dashboard";
 import { userRoutes } from "@/features/users";
+import { calibrationRoutes } from "@/features/calibration";
 
 const appRoutes = [
     ...dashboardRoutes,
-    ...userRoutes
+    ...userRoutes,
+    ...calibrationRoutes
 ];
 export default appRoutes;
 ```
@@ -66,6 +68,8 @@ const router = createBrowserRouter([
 Route page titles are set via `handle: { title: "..." }` on route objects. `AdminLayout` reads them via `useMatches()`.
 
 Route nav items are set via `handle: { nav: { label: "..." } }` on route objects. `Sidebar` reads them via `getNavItems()` from `src/routes/nav.js`.
+
+Sidebar active highlighting matches the first path segment (`location.pathname.split("/")[1]`), so nested routes like `/calibration/process` keep the `Calibration` nav item highlighted.
 
 **To add a new feature route:**
 1. Create `src/features/<name>/routes.jsx` exporting an array with `handle: { title, nav: { label } }`
@@ -102,6 +106,10 @@ Features own their own data fetching via custom hooks that use the shared `useFe
 
 Domain enums live in each feature's `constants/` dir and are shared by both the service layer (so mock/API data can never drift from component expectations) and feature components.
 
+### Status Colors
+
+`src/utils/statusColorUtils.js` exposes a shared `getStatusColor(value, thresholds)` used by the dashboard and calibration pages to color accuracy values: `success.main` above the success threshold, `warning.main` above the warning threshold, otherwise `error.main`. Calibration/dashboard thresholds are typically `{ success: 90, warning: 80 }`.
+
 The dashboard defines the activity model used by the recent-activity feed and the five planned features:
 
 - **Activity types** — named `GROUP_ACTION` in `src/features/dashboard/constants/activityTypes.js`. Groups: `SESSION`, `CALIBRATION`, `TRACKING`, `DEVICE`, `ANALYSIS`, `REPORT`, `PROFILE`, `MODEL` (e.g. `CALIBRATION_COMPLETED`, `DEVICE_ERROR`).
@@ -109,16 +117,28 @@ The dashboard defines the activity model used by the recent-activity feed and th
 - **Status → chip colour** mapping: `Completed`→success, `Failed`→error, `Warning`→warning, `Running`/`Pending`→info.
 - **Display mapping** — components derive icon/colour from the type's group prefix (first `_`-separated segment) via a `typeConfig` map; profile-subtypes `AVATAR_*`/`PASSWORD_*` alias the `PROFILE` config; unknown groups fall back to the `SESSION` config.
 
+### Calibration
+
+The calibration feature navigates a three-step flow: Overview (`/calibration/overview`) → Process (`/calibration/process`) → Result (`/calibration/result`).
+
+- `services/calibrationService.js` — `getCalibration()` returns mock `currentCalibration` and `calibrationResult` payloads (model, accuracy, device, createdAt, status)
+- `hooks/useCalibration.js` — wraps `getCalibration()` in the shared `useFetch` hook
+- `pages/CalibrationOverview.jsx` + `components/overview/CurrentCard.jsx` — current calibration details with `getStatusColor`-colored accuracy and a status chip; "Start Calibration" navigates to the process page
+- `pages/CalibrationProcess.jsx` — stubbed process page; "Calibration Done"/"Back" navigate between result and overview
+- `pages/CalibrationResult.jsx` + `components/result/ResultCard.jsx`, `InfoCard.jsx` — success/failure verdict from `data.status`, point-error/accuracy/model cards (`getStatusColor` on accuracy), and a "Start Gaze Estimate" button
+
 ### Implemented Features
 
 | Feature | Routes | Description |
 |---------|--------|-------------|
 | `dashboard` | `/` | Metric cards (Sessions, Attention, Calibration, Device), attention-trend line chart, recent-activity feed |
 | `users` | `/user` | User profile, avatar card, tracking configuration |
+| `calibration` | `/calibration/overview`, `/calibration/process`, `/calibration/result` | Current calibration card, calibration process flow, result page with accuracy/point-error/model info |
+
+Only the feature index routes (`dashboard`, `users`, `calibration/overview`) expose a nav item; calibration sub-pages (`process`, `result`) are reachable by navigation only.
 
 ### Planned Features (detail.md stubs only)
 
-- `calibration` — Calibration type selection (5-point, 9-point, Jussa, Columns) and accuracy display
 - `gaze-estimate`
 - `my-analytics`
 - `reports`
@@ -151,7 +171,7 @@ return { dashboard, loading };
 
 ## Theming
 
-Dark violet/indigo palette defined in `src/themes/theme/default.js`. The theme system:
+Solarized dark palette defined in `src/themes/theme/default.js`. The theme system:
 
 1. `src/themes/palette.jsx` — `buildPalette(presetColor)` maps color tokens to MUI palette structure
 2. `src/themes/typography.jsx` — Typography config
