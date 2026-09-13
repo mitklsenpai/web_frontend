@@ -1,19 +1,28 @@
 import { useNavigate } from "react-router-dom";
 import { Stack, Box, Card, Chip, Button, Typography } from "@mui/material"
-import { getStatusColor } from "../../../utils/statusColorUtils"
-// ==============
-// MOCK DATA
-// ==============
-const accuracy = 80
+import { getStatusColor } from "../../../../utils/statusColorUtils"
+import { values } from "lodash-es";
 
 
+
+const processPath = "/calibration/process"
 const threshholds = [{
     "success": 90,
     "warning": 80,
 }]
 
-export default function CurrentCard() {
+function getChipColor (value) {
+    return (
+        value == "Success" ? 
+        "success.main" : "error.main"
+    )
+}
+
+export default function CurrentCard({data}) {
     const navigate = useNavigate();
+    let status = data.status;
+    let accuracy = data.accuracy;
+
     return (
         <Card sx={{
                 border: "1px solid",
@@ -38,7 +47,7 @@ export default function CurrentCard() {
             >
     
                 <Typography variant="body1" >
-                    Model: CAL-001 
+                    Model: {data.model}
                 </Typography>
 
                 <Typography variant="body1" >
@@ -55,22 +64,27 @@ export default function CurrentCard() {
                 </Typography>
 
                 <Typography variant="body1" >
-                    Device: DEV-001
+                    Device: {data.device}
                 </Typography>
 
                 <Typography variant="body1" >
-                    Created At: 22/08/2026
+                    Created At: {data.createAt}
                 </Typography>
 
-                <Typography variant="body1">
-                    Status: {
-                        <Chip
-                            label= "Ready"
-                            size="small"
-                            color={"success"} variant="outlined"
-                        />
-                    }
-                </Typography>
+                <Stack direction="row" spacing={0.5}>
+                    <Typography variant="body1">
+                        Status:
+                    </Typography>
+                    <Chip
+                        label={status}
+                        size="small"
+                        variant="outlined"
+                        sx={{
+                            color: getChipColor(status),
+                            borderColor: getChipColor(status),
+                        }}
+                    />
+                </Stack>
 
             </Stack>
 
@@ -83,9 +97,11 @@ export default function CurrentCard() {
                     bgcolor: "primary.main",
                     color: "text.light"
                 }}
-                onClick={ () => { navigate("/calibration/start") }}
+                onClick={ () => { 
+                    navigate(processPath) 
+                }}
             >
-                Start Calibration
+                 Start Calibration 
             </Button>
 
         </Card>
