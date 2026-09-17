@@ -1,0 +1,220 @@
+================================================================================
+BÁO CÁO TỔNG HỢP VÀ PHÂN TÍCH DỰ ÁN EYE TRACKER ADMIN DASHBOARD
+Tên dự án: web_frontend
+Đường dẫn: c:/xampp/htdocs/web_frontend-main
+Thời gian phân tích: Tháng 9/2026
+================================================================================
+
+1. TỔNG QUAN DỰ ÁN (PROJECT OVERVIEW)
+--------------------------------------------------------------------------------
+- Eye Tracker Admin Dashboard là ứng dụng web quản trị dành cho hệ thống thiết bị
+  theo dõi chuyển động mắt (Eye Tracker).
+- Ứng dụng cung cấp các tính năng:
+  + Quản lý và giám sát trạng thái thiết bị mắt (ESP 3200, FPS, kết nối).
+  + Quản lý hồ sơ người dùng cá nhân và cấu hình phần cứng mắt.
+  + Quy trình hiệu chuẩn độ chính xác (Calibration flow 3 bước).
+  + Theo dõi chỉ số tập trung, xu hướng chú ý (Attention trend) theo thời gian.
+  + Ghi nhận nhật ký hoạt động gần đây (Recent activities).
+  + Kế hoạch mở rộng: Ước lượng ánh nhìn realtime (Gaze estimate), phân tích
+    chuyên sâu (My analytics), xuất báo cáo (Reports), phiên kiểm thử (Test session).
+- Backend API chạy độc lập tại http://localhost:8080/api. Hiện tại hầu hết các
+  dịch vụ (services) đang dùng mock data để phát triển giao diện độc lập.
+
+2. CÔNG NGHỆ VÀ CÔNG CỤ (TECH STACK & TOOLS)
+--------------------------------------------------------------------------------
+- UI Framework: React 19 (19.2.7) - 100% Functional Components.
+- Build Tool: Vite 8 (8.1.1) - Plugin React kết hợp Babel React Compiler.
+- Trình tối ưu hóa: babel-plugin-react-compiler (tối ưu hóa re-render tự động).
+- Component Library: Material UI (MUI) v9 (9.2.0) (@mui/material, @mui/icons-material).
+- Charts: @mui/x-charts (9.12.0) dùng cho LineChart trong AttentionTrendCard.
+- Routing: React Router DOM v7 (7.18.1) sử dụng Data Router (createBrowserRouter).
+- HTTP Client: Axios (1.18.1) tại src/services/api.js.
+- Linter: oxlint (1.71.0) viết bằng Rust thay thế ESLint (file .oxlintrc.json).
+- Ngôn ngữ: JavaScript (ESM) thuần - KHÔNG SỬ DỤNG TYPESCRIPT (.jsx và .js).
+- Path Alias: "@" ánh xạ tới thư mục "src/".
+
+3. CẤU TRÚC THƯ MỤC DỰ ÁN
+--------------------------------------------------------------------------------
+c:/xampp/htdocs/web_frontend-main/
+├── docs/                      # Tài liệu kiến trúc và ngữ cảnh dự án
+│   ├── architecture.md
+│   └── project-context.md
+├── src/
+│   ├── main.jsx               # Khởi tạo React root, bọc ConfigProvider
+│   ├── App.jsx                # Bọc ThemeCustomization và RouterProvider
+│   ├── config.js              # Cấu hình app gốc (font Roboto, borderRadius 8)
+│   ├── routes/                # Quản lý routing tập trung
+│   │   ├── config.js          # Central registry gộp routes từ các feature
+│   │   ├── index.jsx          # createBrowserRouter bọc AdminLayout
+│   │   └── nav.js             # Hàm getNavItems() trích xuất menu cho Sidebar
+│   ├── layouts/               # Khung giao diện dùng chung (App Shell)
+│   │   ├── AdminLayout.jsx    # Shell chính: Sidebar bên trái, Header & Content bên phải
+│   │   ├── Sidebar.jsx        # Menu bên trái tự động lấy theo route config
+│   │   ├── Header.jsx         # AppBar trên cùng chứa Title và UserMenu
+│   │   ├── PageHeader.jsx     # Hiển thị tiêu đề trang và breadcrumb
+│   │   ├── UserMenu.jsx       # Icon thông báo và avatar người dùng
+│   │   └── Logo.jsx           # Logo chữ "Eye Tracker"
+│   ├── features/              # Mô-đun tính năng (Feature-Sliced Architecture)
+│   │   ├── dashboard/         # Trang chủ tổng quan các chỉ số và biểu đồ
+│   │   │   ├── components/    # AttentionTrendCard, DeviceCard, MetricCard, RecentActivity
+│   │   │   ├── constants/     # activityTypes.js (Enum các loại hoạt động)
+│   │   │   ├── hooks/         # useDashboard.js
+│   │   │   ├── pages/         # DashboardPage.jsx
+│   │   │   ├── routes.jsx     # Route '/'
+│   │   │   ├── services/      # dashboardService.js
+│   │   │   └── index.js       # Barrel export
+│   │   ├── users/             # Quản lý tài khoản cá nhân & cấu hình
+│   │   │   ├── components/    # AvatarCard, ProfileCard, TrackingConfiguration
+│   │   │   ├── hooks/         # useUsers.js
+│   │   │   ├── pages/         # UserPage.jsx
+│   │   │   ├── routes.jsx     # Route '/user'
+│   │   │   ├── services/      # userService.js
+│   │   │   └── index.js       # Barrel export
+│   │   ├── calibration/       # Quy trình hiệu chuẩn mắt (3 bước)
+│   │   │   ├── components/    # CurrentCard, ResultCard, InfoCard
+│   │   │   ├── hooks/         # useCalibration.js
+│   │   │   ├── pages/         # CalibrationOverview, Process, Result
+│   │   │   ├── routes.jsx     # Routes /calibration/*
+│   │   │   ├── services/      # calibrationService.js
+│   │   │   └── index.js       # Barrel export
+│   │   ├── gaze-estimate/     # Ước lượng ánh nhìn realtime (Realtime Tracking)
+│   │   │   ├── components/    # CameraFeed, GazeStats, GazeControls, GazeEstimateCard
+│   │   │   ├── hooks/         # useGazeEstimate.js
+│   │   │   ├── pages/         # GazeEstimatePage.jsx
+│   │   │   ├── routes.jsx     # Route '/gaze-estimate'
+│   │   │   └── index.js       # Barrel export
+│   │   ├── my-analytics/      # [Kế hoạch] Thống kê phân tích: Fixation, Saccade,...
+│   │   ├── reports/           # [Kế hoạch] Xuất file Excel/CSV, xem lại bản ghi
+│   │   └── test-session/      # [Kế hoạch] Chi tiết phiên tracking
+│   ├── components/common/     # Component dùng chung: Status.jsx, ChipStatus.jsx
+│   ├── contexts/              # React Context: ConfigContext.jsx
+│   ├── hooks/                 # Hooks dùng chung: useFetch.js, useLocalStorage.js, useConfig.js
+│   ├── services/              # api.js (Axios instance gốc)
+│   ├── themes/                # Hệ thống Theme MUI (Solarized Dark)
+│   │   ├── index.jsx          # ThemeCustomization
+│   │   ├── palette.jsx        # Mapping bảng màu
+│   │   ├── typography.jsx     # Cấu hình phông chữ
+│   │   ├── customShadows.jsx  # Đổ bóng
+│   │   ├── theme/default.js   # Bảng mã màu Solarized Dark
+│   │   └── overrides/         # Ghi đè kiểu dáng 25+ MUI components
+│   └── utils/                 # colorUtils.js, statusColorUtils.js
+├── PROJECT_ANALYSIS.doc       # Bản báo cáo định dạng MS Word
+├── PROJECT_ANALYSIS.txt       # Bản báo cáo định dạng văn bản thuần
+├── index.html
+├── package.json
+├── vite.config.js
+└── .oxlintrc.json
+
+4. KHUNG KIẾN TRÚC & CƠ CHẾ HOẠT ĐỘNG
+--------------------------------------------------------------------------------
+4.1. Kiến trúc Feature-Sliced:
+- Mỗi tính năng nằm độc lập trong thư mục src/features/<tên-tính-năng>/.
+- Đầy đủ các tầng: routes, pages, components, hooks, services, constants.
+- Không để logic hay component của tính năng này lẫn sang tính năng khác.
+
+4.2. Cơ chế Routing tập trung & Tự động sinh Menu Sidebar:
+- Mỗi feature có routes.jsx định nghĩa các route, kèm metadata trong thuộc tính handle:
+  handle: {
+    title: "Tên trang",
+    nav: { label: "Tên hiển thị menu" }
+  }
+- src/routes/config.js tập hợp tất cả route từ các feature thành mảng appRoutes.
+- Sidebar.jsx gọi hàm getNavItems(appRoutes) từ src/routes/nav.js để tự động render menu.
+  -> Khi thêm feature mới, chỉ cần khai báo route và import vào routes/config.js,
+     Sidebar sẽ tự nhận mà không cần chỉnh sửa code trong Sidebar.
+- AdminLayout.jsx dùng useMatches() để lấy handle.title hiển thị lên Header.
+
+4.3. Quản lý trạng thái (State) & Lấy dữ liệu (Data Fetching):
+- Không dùng Redux hay Zustand nhằm giữ code gọn gàng, nhanh và dễ bảo trì.
+- ConfigContext: Lưu thiết lập giao diện (font, bo góc) vào localStorage qua key
+  'berry-config-vite-js'.
+- Form State: Dùng useState cục bộ bên trong từng component (ví dụ ProfileCard).
+- useFetch hook: Nằm tại src/hooks/useFetch.js nhận vào fetchFn, trả về { data, loading, error, refetch }.
+  Các hook như useDashboard, useUsers, useCalibration chỉ cần bọc hàm gọi API vào
+  useCallback rồi chuyển cho useFetch.
+
+4.4. Hệ thống Giao diện (Theme System):
+- Áp dụng phong cách Solarized Dark:
+  + Nền ứng dụng: #002B36 (Dark Teal)
+  + Khối thẻ (Paper): #073642
+  + Màu chính (Primary): #268BD2 (Solarized Blue)
+  + Màu phụ (Secondary): #2AA198 (Solarized Cyan)
+  + Màu thành công (Success): #00e676 / Cảnh báo: #ffe57f / Lỗi: #DC322F
+- Hơn 25 file override trong src/themes/overrides/ tùy biến toàn bộ giao diện MUI
+  (Card, Button, Chip, TextField, OutlinedInput, Table, ListItemButton,...).
+
+5. CHI TIẾT CÁC TÍNH NĂNG
+--------------------------------------------------------------------------------
+5.1. Dashboard ('/'):
+- 4 Card thống kê chính: Sessions, Attention, Calibration, Device.
+- Calibration Accuracy tự đổi màu qua getStatusColor():
+  + >= 90%: Xanh lá (success)
+  + >= 80%: Vàng (warning)
+  + < 80%: Đỏ (error)
+- AttentionTrendCard: Biểu đồ đường @mui/x-charts hiển thị chỉ số chú ý theo tuần.
+- DeviceCard: Thông tin thiết bị ESP 3200, 30 FPS, trạng thái Online.
+- RecentActivity: Danh sách hoạt động gần đây sắp xếp theo thời gian, hiển thị icon
+  và chip trạng thái dựa trên activityTypes.js.
+
+5.2. Users ('/user'):
+- AvatarCard: Ảnh đại diện lớn, 3 badge trạng thái (Active, Calibration ready, Device online).
+- ProfileCard: Hiển thị thông tin cá nhân. Hỗ trợ nút Edit để mở chỉnh sửa Họ tên,
+  Email, SĐT; nút Save để lưu và Cancel để hủy.
+- TrackingConfiguration: Cấu hình thiết bị mắt (Model, Code, Loại hiệu chuẩn, Độ chính xác,...).
+
+5.3. Calibration ('/calibration/*'):
+- /calibration/overview: Thẻ thông số hiệu chuẩn hiện tại và nút "Start Calibration".
+- /calibration/process: Màn hình mô phỏng quy trình hiệu chuẩn với 2 nút "Calibration Done" và "Back".
+- /calibration/result: Màn hình kết quả hiệu chuẩn (Thành công/Thất bại, Point Error, Accuracy, Model)
+  và nút "Start Gaze Estimate".
+
+5.4. Gaze Estimate ('/gaze-estimate'):
+- Màn hình theo dõi ánh nhìn theo thời gian thực (Realtime Tracking):
+  + Khung CAMERA FEED: Hiển thị luồng camera và điểm nhìn màu đỏ (Gaze Point).
+    * Khi chưa bấm Start hoặc sau khi bấm Stop: Điểm đỏ Gaze Point hoàn toàn ẩn.
+    * Khi bấm Start: Điểm đỏ xuất hiện và di chuyển ngẫu nhiên trên khung hình trong 10 giây.
+    * Khi bấm Pause: Điểm đỏ tạm dừng tại vị trí hiện tại (không bị ẩn). Bấm Start lại sẽ tiếp tục di chuyển và đếm tiếp thời gian còn lại.
+    * Khi bấm Stop: Kết thúc luôn quá trình, ẩn điểm đỏ và reset bộ đếm thời gian 10s.
+  + 4 thẻ thống kê: Gaze X, Gaze Y (tọa độ pixel thực tế theo chuyển động), Confidence (92-97%), FPS (30).
+  + Trạng thái hệ thống (Status):
+    * Khi chưa bấm Start hoặc bấm Stop: Hiển thị "Stopping" kèm chấm đỏ.
+    * Khi bấm Start đang chạy: Hiển thị "Tracking" kèm chấm xanh phát sáng và đếm lùi thời gian (ví dụ 10s -> 0s).
+    * Khi bấm Pause: Hiển thị "Pausing" kèm chấm vàng.
+  + Bộ 3 nút điều khiển: [ Start ], [ Pause ] / [ Continue ], [ Stop ] bo viền xanh cyan đồng bộ thiết kế:
+    * Khi đang Pausing: Nút Pause tự động đổi thành [ Continue ] để tiếp tục tracking, đồng thời nút [ Start ] bị vô hiệu hóa (disabled).
+    * Khi đang Tracking: Nút [ Start ] bị vô hiệu hóa, nút Pause hoạt động bình thường.
+    * Khi đang Stopping: Nút [ Start ] sẵn sàng, nút Pause bị vô hiệu hóa.
+  + Bố cục hiển thị: Thiết kế mở rộng toàn màn hình (gần như full screen trừ thanh Sidebar bên trái), Camera Feed co giãn linh hoạt chiều cao lên tới 520px+ trên màn hình lớn.
+
+5.5. Các tính năng đang lên kế hoạch (Stubs):
+- my-analytics: Báo cáo phân tích chuyên sâu (Attention, Gaze distribution, Fixation, Saccade, Accuracy).
+- reports: Xuất file Excel/CSV, phát lại bản ghi, hiển thị ảnh nhiệt.
+- test-session: Xem lại chi tiết từng phiên chạy thử nghiệm.
+
+6. CÁC QUY ƯỚC LẬP TRÌNH & LƯU Ý KỸ THUẬT (GOTCHAS)
+--------------------------------------------------------------------------------
+1. MUI v9 Grid:
+   Bắt buộc dùng prop "size":
+   <Grid size={{ xs: 12, md: 4 }}> ... </Grid>
+   (KHÔNG dùng cú pháp cũ: <Grid item xs={12} md={4}>)
+
+2. MUI v9 slotProps:
+   Bắt buộc dùng "slotProps" thay vì các props cũ:
+   <ListItemText slotProps={{ primary: { pr: 10 } }} />
+   <TextField slotProps={{ input: { readOnly: true } }} />
+   (Tránh dùng primaryTypographyProps hay inputProps vì sẽ gây cảnh báo trên DOM).
+
+3. Lệnh chạy trên Windows PowerShell:
+   Nếu gặp lỗi script execution policy với npm, sử dụng:
+   cmd.exe /c "npm run dev"
+   cmd.exe /c "npm run lint"
+
+4. Một số điểm tồn đọng cần sửa:
+   - Typo thuộc tính 'caibration_type' (thiếu chữ 'l') trong userService.js và TrackingConfiguration.jsx.
+   - Hardcode tên người dùng "Nguyễn Trần Quang Tuyển" trong AvatarCard.jsx thay vì lấy từ dữ liệu user.
+   - CalibrationProcess.jsx hiện mới là khung giữ chỗ với 2 nút bấm.
+   - Hầu hết các API call trong service đang tạm thời trả về mock data nội bộ.
+
+================================================================================
+KẾT THÚC BÁO CÁO
+================================================================================

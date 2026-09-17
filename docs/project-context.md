@@ -1,0 +1,107 @@
+# Project Context
+
+## What Is This App?
+
+An **Eye Tracker** admin dashboard — a web frontend for managing eye tracking devices, users, calibration, and gaze estimation data. The backend runs separately at `localhost:8080/api`.
+
+## Current State
+
+Three features are implemented (Dashboard, Users, Calibration) with mock data. Four more features are planned but only have `detail.md` stubs.
+
+### Implemented and Working
+
+- App shell with sidebar navigation and header
+- Dashboard with metric cards (Sessions, Attention, Calibration, Device), an attention-trend line chart, and a recent-activity feed
+- User profile page with edit capability, avatar, and tracking configuration display
+- Calibration flow: overview → process → result, with accuracy/point-error/model display
+- Shared `getStatusColor` utility for coloring accuracy values by threshold
+- Full MUI theme system with solarized dark palette
+- Config persistence to localStorage
+- Shared `useFetch` hook for data fetching
+- Sidebar nav derived from route config (not hardcoded)
+
+### Mock / Not Yet Connected to Backend
+
+- `dashboardService.js` — Returns hardcoded metric values (`totalUsers`, `totalSessions`, `attentionRate`, `calibrationAccuracy`, `activeDevices`) and a `recentActivities` list
+- `userService.js` — Returns hardcoded user data and device configuration
+- `calibrationService.js` — Returns hardcoded `currentCalibration` and `calibrationResult` payloads
+
+### Planned (Empty Stubs)
+
+- `gaze-estimate`
+- `my-analytics`
+- `reports`
+- `test-session`
+
+## Key Conventions
+
+### Code Style
+
+- **No TypeScript** — All `.jsx`/`.js` files
+- **Functional components only** — No class components
+- **Named exports** for hooks and utilities, default exports for components
+- **Feature barrel exports** — Each feature's `index.js` re-exports its route array
+- **Import alias** — Use `@/` for `src/` imports (e.g., `import X from '@/services/api'`)
+- **No comments** — Code is expected to be self-documenting
+- **MUI v9 Grid** — Use `size={{ xs: 12, md: 4 }}` not `xs={12} md={4}`
+- **MUI v9 `slotProps`** — Used instead of `inputProps` for component customization
+- **sx prop** — Primary styling method, inline with components
+
+### Data Fetching Pattern
+
+Shared `useFetch(fetchFn)` hook at `src/hooks/useFetch.js`. Feature hooks wrap service calls in `useCallback` and pass to `useFetch`:
+
+```js
+const fetchDashboard = useCallback(async () => {
+    const res = await getDashboard();
+    return res.data;
+}, []);
+
+const { data: dashboard, loading } = useFetch(fetchDashboard);
+return { dashboard, loading };
+```
+
+For mutations (create/update), keep the async function in the feature hook and call the service directly.
+
+### Component Structure
+
+- Page components live in `features/<name>/pages/`
+- Feature components live in `features/<name>/components/`
+- Shared components live in `src/components/` (common/)
+- Layouts live in `src/layouts/`
+
+### Adding a New Feature
+
+1. Create `src/features/<name>/` directory
+2. Create `index.js` exporting route array
+3. Create `routes.jsx` with route definitions including `handle: { title: "...", nav: { label: "..." } }`
+4. Create `pages/`, `components/`, `hooks/`, `services/`, and `constants/` (for shared enums/data contracts) as needed
+5. Import and spread route array in `src/routes/config.js`
+
+Sidebar nav is automatically derived from route `handle.nav` — no manual sidebar edits needed.
+
+### Theme Customization
+
+To change colors: edit `src/themes/theme/default.js` (solarized dark color tokens) and `src/themes/palette.jsx` (palette mapping).
+
+To override MUI components: add/modify files in `src/themes/overrides/` and register in `src/themes/overrides/index.js`.
+
+To change font or border radius: edit `src/config.js`.
+
+## Commands
+
+| Command | Purpose |
+|---------|---------|
+| `npm run dev` | Start Vite dev server |
+| `npm run build` | Production build |
+| `npm run lint` | Run oxlint |
+| `npm run preview` | Preview production build |
+
+No test command is configured. Test files exist in `__tests__/` directories but no test runner (vitest/jest) is installed.
+
+## Known Issues
+
+- `TrackingConfiguration` has a typo: field name `caibration_type` (missing 'l')
+- `AvatarCard` has a hardcoded user name
+- `CalibrationProcess` is a stub — no actual calibration workflow yet
+- Services return mock data — real API integration is pending

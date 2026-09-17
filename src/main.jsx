@@ -1,0 +1,12 @@
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from './App';
+import { ConfigProvider } from './contexts/ConfigContext';
+
+ReactDOM.createRoot(
+    document.getElementById("root")
+).render(
+    <ConfigProvider>
+       <App />
+    </ConfigProvider>
+);
