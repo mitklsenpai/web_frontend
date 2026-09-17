@@ -38,7 +38,7 @@ function AdminLayout() {
                 <Box
                     sx={{
                         flex: 1,
-                        p: { xs: 1.5, md: 2 },
+                        p: 3,
                         bgcolor: "background.default",
                         overflow: "auto"
                     }}
