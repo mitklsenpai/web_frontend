@@ -1,6 +1,7 @@
 import { dashboardRoutes } from "@/features/dashboard";
 import { userRoutes } from "@/features/users";
 import { calibrationRoutes } from "@/features/calibration";
+import { gazeEstimateRoutes } from "@/features/gaze-estimate";
 
 // ==============================|| ROUTES - CONFIG ||============================== //
 
@@ -9,7 +10,9 @@ import { calibrationRoutes } from "@/features/calibration";
 const appRoutes = [
     ...dashboardRoutes,
     ...userRoutes,
-    ...calibrationRoutes
+    ...calibrationRoutes,
+    ...gazeEstimateRoutes
 ];
 
 export default appRoutes;
+

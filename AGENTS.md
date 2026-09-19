@@ -59,3 +59,10 @@ Dark violet/indigo palette defined in `src/themes/theme/default.js`. MUI compone
 - MUI v9 `slotProps` - use it instead of legacy props like `inputProps`/`primaryTypographyProps`. Passing legacy Typography props to `ListItemText` (e.g. `primaryTypographyProps`) leaks the prop name onto the DOM element and fires a React warning; use `slotProps={{ primary: { ... } }}`
 - Route page titles are set via `handle: { title: "..." }` on route objects, consumed by `AdminLayout` via `useMatches()`
 - Route nav items are set via `handle: { nav: { label: "..." } }` on route objects, consumed by `Sidebar` via `getNavItems()`
+
+## Documentation Maintenance Rule
+
+- **MANDATORY**: Bất kỳ khi nào có chỉnh sửa file hoặc thêm file mới trong dự án, BẮT BUỘC phải cập nhật đầy đủ và đồng bộ vào cả 2 file:
+  - `PROJECT_ANALYSIS.doc`
+  - `PROJECT_ANALYSIS.txt`
+
