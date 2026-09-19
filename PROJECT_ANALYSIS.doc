@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html xmlns:o='urn:schemas-microsoft-com:office:office' 
+      xmlns:w='urn:schemas-microsoft-com:office:word' 
+      xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+    <meta charset="utf-8">
+    <title>Báo Cáo Phân Tích Toàn Diện Dự Án Eye Tracker Admin Dashboard</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>100</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: #24292e;
+            margin: 40px;
+        }
+        h1 {
+            color: #15527F;
+            font-size: 22pt;
+            border-bottom: 2px solid #268BD2;
+            padding-bottom: 8px;
+            margin-top: 20px;
+        }
+        h2 {
+            color: #1E6FA8;
+            font-size: 16pt;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 6px;
+            margin-top: 24px;
+        }
+        h3 {
+            color: #2AA198;
+            font-size: 13pt;
+            margin-top: 18px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #d0d7de;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f6f8fa;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background-color: #fbfcfd;
+        }
+        pre, code {
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 10pt;
+        }
+        pre {
+            background-color: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 12px;
+            overflow-x: auto;
+            line-height: 1.45;
+        }
+        code {
+            background-color: #f0f2f5;
+            padding: 2px 4px;
+            border-radius: 4px;
+            color: #c7254e;
+        }
+        .highlight-box {
+            background-color: #f0f7fb;
+            border-left: 4px solid #268BD2;
+            padding: 12px 16px;
+            margin: 15px 0;
+        }
+        .warning-box {
+            background-color: #fff9e6;
+            border-left: 4px solid #f59f00;
+            padding: 12px 16px;
+            margin: 15px 0;
+        }
+        ul, ol {
+            padding-left: 25px;
+        }
+        li {
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>BÁO CÁO TỔNG HỢP VÀ PHÂN TÍCH DỰ ÁN EYE TRACKER ADMIN DASHBOARD</h1>
+
+<div class="highlight-box">
+    <strong>Tên dự án:</strong> web_frontend (Eye Tracker Admin Dashboard)<br>
+    <strong>Thời gian phân tích:</strong> Tháng 9/2026<br>
+    <strong>Mục đích:</strong> Tài liệu hóa toàn diện cấu trúc thư mục, khung kiến trúc, công nghệ nền tảng, các tệp cốt lõi và hướng dẫn phát triển cho lập trình viên.
+</div>
+
+<h2>1. TỔNG QUAN DỰ ÁN</h2>
+<p>
+    <strong>Eye Tracker Admin Dashboard</strong> là ứng dụng Single Page Application (SPA) viết bằng React 19 phục vụ cho việc quản trị hệ thống thiết bị theo dõi mắt (Eye Tracker). Ứng dụng cung cấp các tính năng quản lý thiết bị, người dùng cá nhân, quy trình hiệu chuẩn độ chính xác của mắt (calibration), trực quan hóa dữ liệu ước lượng ánh nhìn (gaze estimation), xu hướng chú ý (attention trend) và các báo cáo hoạt động.
+</p>
+<p>
+    Hệ thống backend API chạy độc lập tại địa chỉ <code>http://localhost:8080/api</code>. Ở giai đoạn phát triển hiện tại, hầu hết các dịch vụ giao tiếp dữ liệu (services) đang dùng <em>mock data</em> để xây dựng và hoàn thiện luồng giao diện độc lập.
+</p>
+
+<h2>2. CÔNG NGHỆ & THƯ VIỆN CỐT LÕI (TECH STACK)</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Tầng / Thành phần</th>
+            <th>Công nghệ sử dụng</th>
+            <th>Phiên bản</th>
+            <th>Đặc điểm & Ghi chú</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>UI Framework</strong></td>
+            <td>React</td>
+            <td>19.2.7</td>
+            <td>Phiên bản React mới nhất, 100% Functional Components</td>
+        </tr>
+        <tr>
+            <td><strong>Build Tool</strong></td>
+            <td>Vite</td>
+            <td>8.1.1</td>
+            <td>Khởi động và HMR siêu tốc; alias <code>@</code> trỏ tới <code>src/</code></td>
+        </tr>
+        <tr>
+            <td><strong>Tối ưu hóa React</strong></td>
+            <td>Babel React Compiler</td>
+            <td>1.0.0</td>
+            <td>Tích hợp qua <code>@rolldown/plugin-babel</code>, tự động tối ưu re-render</td>
+        </tr>
+        <tr>
+            <td><strong>Component Library</strong></td>
+            <td>Material UI (MUI)</td>
+            <td>9.2.0</td>
+            <td>MUI v9 mới nhất (sử dụng <code>@mui/material</code>, <code>@mui/icons-material</code>)</td>
+        </tr>
+        <tr>
+            <td><strong>Biểu đồ (Charts)</strong></td>
+            <td>MUI X Charts</td>
+            <td>9.12.0</td>
+            <td>Vẽ biểu đồ Line Chart trong Attention Trend</td>
+        </tr>
+        <tr>
+            <td><strong>Định tuyến (Routing)</strong></td>
+            <td>React Router DOM</td>
+            <td>7.18.1</td>
+            <td>Cấu hình router tập trung dạng mảng dữ liệu (Data Router)</td>
+        </tr>
+        <tr>
+            <td><strong>HTTP Client</strong></td>
+            <td>Axios</td>
+            <td>1.18.1</td>
+            <td>Instance dùng chung tại <code>src/services/api.js</code></td>
+        </tr>
+        <tr>
+            <td><strong>Linter</strong></td>
+            <td>oxlint</td>
+            <td>1.71.0</td>
+            <td>Linter tốc độ cao viết bằng Rust (thay thế cho ESLint)</td>
+        </tr>
+        <tr>
+            <td><strong>Ngôn ngữ</strong></td>
+            <td>JavaScript (ESM)</td>
+            <td>-</td>
+            <td><strong>Không sử dụng TypeScript</strong>; hoàn toàn là <code>.jsx</code> và <code>.js</code></td>
+        </tr>
+        <tr>
+            <td><strong>Tiện ích phụ trợ</strong></td>
+            <td>lodash-es</td>
+            <td>4.18.1</td>
+            <td>Hỗ trợ merge config theme, xử lý object</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>3. CẤU TRÚC THƯ MỤC DỰ ÁN</h2>
+<pre>
+c:/xampp/htdocs/web_frontend-main/
+├── .agents/                            # Cấu hình AI Agent và Custom Skills
+│   └── skills/
+│       ├── find-skills/                # Skill khám phá và cài đặt agent skills
+│       └── caveman-commit/             # Skill tạo commit message ngắn gọn theo chuẩn Conventional Commits
+├── docs/                               # Tài liệu thiết kế & kiến trúc hệ thống
+│   ├── architecture.md                 # Kiến trúc tổng thể, layout, quy tắc routing
+│   └── project-context.md              # Bối cảnh dự án, trạng thái tính năng, gotchas
+├── src/
+│   ├── main.jsx                        # Điểm khởi chạy (Mount React, bọc ConfigProvider)
+│   ├── App.jsx                         # Cung cấp ThemeCustomization và RouterProvider
+│   ├── config.js                       # Cấu hình app gốc (Font, border radius, theme mode)
+│   ├── routes/                         # Quản lý hệ thống định tuyến (Routing)
+│   │   ├── config.js                   # Danh mục tổng hợp tất cả route từ các features
+│   │   ├── index.jsx                   # Khởi tạo createBrowserRouter
+│   │   └── nav.js                      # Tiện ích getNavItems trích xuất nav cho Sidebar
+│   ├── layouts/                        # Khung giao diện ứng dụng (App Shell)
+│   │   ├── AdminLayout.jsx             # Shell chính: Sidebar cố định, Header & Outlet
+│   │   ├── Sidebar.jsx                 # Thanh menu cố định bên trái (180px)
+│   │   ├── Header.jsx                  # AppBar trên cùng chứa tiêu đề và UserMenu
+│   │   ├── PageHeader.jsx              # Hiển thị Title trang động & Breadcrumbs
+│   │   ├── UserMenu.jsx                # Icon thông báo và avatar người dùng
+│   │   ├── Logo.jsx                    # Logo hiển thị chữ "Eye Tracker"
+│   │   └── GazeEstimateLayout.jsx      # Layout trực quan hóa cho tính năng Gaze Estimate
+│   ├── features/                       # Các module tính năng độc lập (Feature-Sliced)
+│   │   ├── dashboard/                  # Dashboard tổng quan chỉ số và biểu đồ
+│   │   │   ├── components/             # AttentionTrendCard, DeviceCard, MetricCard, RecentActivity
+│   │   │   ├── constants/              # activityTypes.js (Enum các loại hoạt động)
+│   │   │   ├── hooks/                  # useDashboard.js
+│   │   │   ├── pages/                  # DashboardPage.jsx
+│   │   │   ├── routes.jsx              # Khai báo route '/'
+│   │   │   ├── services/               # dashboardService.js (Mock metrics, activities)
+│   │   │   └── index.js                # Barrel export route
+│   │   ├── users/                      # Quản lý tài khoản cá nhân & cấu hình thiết bị
+│   │   │   ├── components/             # AvatarCard, ProfileCard, TrackingConfiguration
+│   │   │   ├── hooks/                  # useUsers.js
+│   │   │   ├── pages/                  # UserPage.jsx
+│   │   │   ├── routes.jsx              # Khai báo route '/user'
+│   │   │   ├── services/               # userService.js
+│   │   │   └── index.js                # Barrel export route
+│   │   ├── calibration/                # Quy trình hiệu chuẩn mắt (3 bước)
+│   │   │   ├── components/             # CurrentCard, ResultCard, InfoCard
+│   │   │   ├── hooks/                  # useCalibration.js
+│   │   │   ├── pages/                  # Overview.jsx, Process.jsx, Result.jsx
+│   │   │   ├── routes.jsx              # Khai báo routes /calibration/*
+│   │   │   ├── services/               # calibrationService.js
+│   │   │   └── index.js                # Barrel export route
+│   │   ├── gaze-estimate/              # Ước lượng ánh nhìn realtime (Realtime Tracking)
+│   │   │   ├── components/             # CameraFeed, GazeStats, GazeControls
+│   │   │   ├── hooks/                  # useGazeEstimate.js
+│   │   │   ├── pages/                  # GazeEstimatePage.jsx
+│   │   │   ├── routes.jsx              # Route '/gaze-estimate'
+│   │   │   └── index.js                # Barrel export route
+│   │   ├── my-analytics/               # [Kế hoạch] Thống kê phân tích: Fixation, Saccade,...
+│   │   ├── reports/                    # [Kế hoạch] Xuất file Excel/CSV, xem lại bản ghi
+│   │   └── test-session/               # [Kế hoạch] Xem lại chi tiết từng phiên tracking
+│   ├── components/common/              # Component UI dùng chung: Status.jsx, ChipStatus.jsx
+│   ├── contexts/                       # React Contexts: ConfigContext.jsx
+│   ├── hooks/                          # Hooks dùng chung: useFetch.js, useLocalStorage.js, useConfig.js
+│   ├── services/                       # api.js (Axios instance gốc)
+│   ├── themes/                         # Hệ thống Theme MUI (Solarized Dark)
+│   │   ├── index.jsx                   # ThemeCustomization Provider
+│   │   ├── palette.jsx                 # Xây dựng schema bảng màu MUI
+│   │   ├── typography.jsx              # Kiểu chữ Roboto
+│   │   ├── customShadows.jsx           # Đổ bóng tùy chỉnh
+│   │   ├── theme/default.js            # Bảng mã màu Solarized Dark
+│   │   └── overrides/                  # Ghi đè kiểu dáng của 25+ MUI components
+│   └── utils/                          # Tiện ích: colorUtils.js, statusColorUtils.js
+├── index.html
+├── package.json
+├── vite.config.js
+└── .oxlintrc.json
+</pre>
+
+<h2>4. KIẾN TRÚC & NGUYÊN LÝ HOẠT ĐỘNG</h2>
+
+<h3>4.1. Kiến trúc Feature-Sliced (Mô-đun hóa độc lập)</h3>
+<p>
+    Dự án áp dụng phương pháp chia theo tính năng (Feature-Sliced). Mỗi thư mục con trong <code>src/features/</code> hoạt động như một module khép kín:
+</p>
+<ul>
+    <li><strong>index.js:</strong> Chỉ export mảng route của module ra ngoài.</li>
+    <li><strong>routes.jsx:</strong> Định nghĩa đường dẫn và metadata giao diện (title, nav label) qua trường <code>handle</code>.</li>
+    <li><strong>services/:</strong> Tương tác trực tiếp với API backend hoặc cung cấp dữ liệu giả lập.</li>
+    <li><strong>hooks/:</strong> Đóng gói logic state và kết nối service với UI thông qua hook dùng chung <code>useFetch</code>.</li>
+    <li><strong>components/ & pages/:</strong> Chứa giao diện chuyên biệt cho tính năng đó.</li>
+</ul>
+
+<h3>4.2. Khung Routing & Tự Động Hóa Menu Điều Hướng (Dynamic Sidebar)</h3>
+<p>
+    Cách tiếp cận routing của dự án rất thông minh và mang tính mở rộng cao:
+</p>
+<ol>
+    <li>Mỗi feature tự định nghĩa routes của mình, gắn nhãn menu vào <code>handle.nav.label</code>:
+        <pre><code>// src/features/dashboard/routes.jsx
+const dashboardRoutes = [
+    {
+        path: "/",
+        element: &lt;DashboardPage /&gt;,
+        handle: {
+            title: "Dashboard",
+            nav: { label: "Dashboard" }
+        }
+    }
+];</code></pre>
+    </li>
+    <li>File trung tâm <code>src/routes/config.js</code> gộp tất cả routes lại thành một mảng <code>appRoutes</code>.</li>
+    <li>File <code>src/routes/index.jsx</code> truyền <code>appRoutes</code> làm children của <code>AdminLayout</code>.</li>
+    <li><strong>Sidebar tự động cập nhật:</strong> <code>Sidebar.jsx</code> gọi hàm <code>getNavItems(appRoutes)</code> từ <code>src/routes/nav.js</code> để tự động kết xuất menu. Lập trình viên chỉ cần thêm route mới vào <code>config.js</code> là Sidebar sẽ tự có nút bấm tương ứng mà không cần sửa code giao diện Sidebar.</li>
+    <li><strong>Tiêu đề trang tự động:</strong> <code>AdminLayout.jsx</code> đọc <code>useMatches().at(-1)?.handle?.title</code> để tự động hiển thị tên trang trên Header.</li>
+</ol>
+
+<h3>4.3. Quản Lý Trạng Thái & Lấy Dữ Liệu (State & Data Fetching)</h3>
+<ul>
+    <li><strong>Không phụ thuộc thư viện ngoài:</strong> Dự án không dùng Redux, MobX hay Zustand. Trạng thái được giữ tối giản:
+        <ul>
+            <li><strong>ConfigContext:</strong> Quản lý cài đặt giao diện (font chữ, bo góc) và tự động đồng bộ vào <code>localStorage</code> với key <code>berry-config-vite-js</code> thông qua hook <code>useLocalStorage</code>.</li>
+            <li><strong>Local State:</strong> Dùng <code>useState</code> cho các form nhập liệu (như chỉnh sửa Profile cá nhân).</li>
+        </ul>
+    </li>
+    <li><strong>Hook useFetch dùng chung:</strong> Nằm tại <code>src/hooks/useFetch.js</code>, cung cấp giao diện chuẩn <code>{ data, loading, error, refetch }</code>. Các hook trong feature chỉ cần bọc hàm gọi API trong <code>useCallback</code> rồi chuyển cho <code>useFetch</code>.</li>
+</ul>
+
+<h3>4.4. Hệ Thống Giao Diện Solarized Dark (Theme System)</h3>
+<p>
+    Ứng dụng được thiết kế theo phong cách <strong>Solarized Dark</strong> kết hợp các cấu hình kế thừa từ mẫu Berry MUI:
+</p>
+<ul>
+    <li>Màu nền chính (Background): <code>#002B36</code>.</li>
+    <li>Màu thẻ khối (Paper): <code>#073642</code>.</li>
+    <li>Màu chủ đạo (Primary): Solarized Blue (<code>#268BD2</code>).</li>
+    <li>Màu phụ (Secondary): Solarized Cyan (<code>#2AA198</code>).</li>
+    <li>Hơn 25 file ghi đè (overrides) tại <code>src/themes/overrides/</code> giúp toàn bộ các thành phần MUI (nút, input, bảng, thẻ card, danh sách, chip) ăn khớp hoàn toàn với bảng màu tối cao cấp.</li>
+</ul>
+
+<h2>5. TÌNH TRẠNG VÀ CHI TIẾT CÁC TÍNH NĂNG</h2>
+
+<h3>5.1. Dashboard (Trang chủ <code>/</code>)</h3>
+<ul>
+    <li><strong>Thẻ chỉ số (Metric Cards):</strong> Thống kê Sessions, Attention (%), Calibration (%), Device.</li>
+    <li><strong>Đổi màu theo ngưỡng:</strong> Độ chính xác hiệu chuẩn sử dụng hàm <code>getStatusColor(accuracy, thresholds)</code> từ <code>statusColorUtils.js</code> để tự động đổi màu Xanh (&gt;=90%), Vàng (&gt;=80%), Đỏ (&lt;80%).</li>
+    <li><strong>AttentionTrendCard:</strong> Biểu đồ xu hướng chú ý (Attention vs Baseline) theo các ngày trong tuần sử dụng <code>@mui/x-charts/LineChart</code>.</li>
+    <li><strong>DeviceCard:</strong> Thông tin thiết bị hiện hành (Model ESP 3200, 30 FPS, trạng thái kết nối).</li>
+    <li><strong>RecentActivity:</strong> Danh sách nhật ký hoạt động có icon phân nhóm (Session, Calibration, Tracking, Device, Analysis, Report, Profile, Model) theo <code>activityTypes.js</code>.</li>
+</ul>
+
+<h3>5.2. Users (Trang cá nhân & cấu hình <code>/user</code>)</h3>
+<ul>
+    <li><strong>AvatarCard:</strong> Khối ảnh đại diện và 3 nhãn trạng thái động: Active, Calibration ready, Device online.</li>
+    <li><strong>ProfileCard:</strong> Hiển thị thông tin cá nhân. Hỗ trợ nút <strong>Edit</strong> để chuyển các ô nhập (Họ tên, Email, SĐT) sang chế độ chỉnh sửa, nút <strong>Save</strong> để lưu và <strong>Cancel</strong> để khôi phục.</li>
+    <li><strong>TrackingConfiguration:</strong> Hiển thị thông số cấu hình phần cứng mắt (Device Model, Device Code, Calibration Model, Calibration Accuracy, Status,...).</li>
+</ul>
+
+<h3>5.3. Calibration (Luồng hiệu chuẩn <code>/calibration/*</code>)</h3>
+<p>Quy trình gồm 3 màn hình tuần tự:</p>
+<ul>
+    <li><strong>Overview (<code>/calibration/overview</code>):</strong> Hiển thị thông số của lần hiệu chuẩn gần nhất và nút "Start Calibration".</li>
+    <li><strong>Process (<code>/calibration/process</code>):</strong> Giao diện thực hiện quá trình hiệu chuẩn mắt với nút "Calibration Done" và "Back".</li>
+    <li><strong>Result (<code>/calibration/result</code>):</strong> Báo cáo kết quả hiệu chuẩn (Thành công/Thất bại, Point Error, Accuracy, Model) và nút chuyển tiếp sang "Start Gaze Estimate".</li>
+</ul>
+
+<h3>5.4. Gaze Estimate (Màn hình ước lượng ánh nhìn Realtime <code>/gaze-estimate</code>)</h3>
+<p>
+    Màn hình xử lý và trực quan hóa theo thời gian thực (Realtime Tracking) đúng chuẩn thiết kế mẫu:
+</p>
+<ul>
+    <li><strong>Khung CAMERA FEED:</strong>
+        <ul>
+            <li>Hiển thị nhãn <code>CAMERA FEED</code> góc trên.</li>
+            <li><strong>Điểm nhìn (Gaze Point):</strong> Chấm tròn đỏ rực kèm chữ "Gaze Point" bên dưới.</li>
+            <li><strong>Quy tắc hiển thị:</strong> Khi chưa bấm Start hoặc sau khi bấm Stop, điểm Gaze Point <em>hoàn toàn bị ẩn</em>. Khi bấm Start, điểm Gaze Point xuất hiện và di chuyển ngẫu nhiên trên khung hình trong 10 giây. Khi bấm Pause, điểm đỏ tạm dừng đứng yên tại vị trí hiện tại (không bị ẩn). Khi bấm Stop, toàn bộ quá trình kết thúc và điểm đỏ biến mất.</li>
+        </ul>
+    </li>
+    <li><strong>4 Thẻ chỉ số hiệu năng (Stat Cards):</strong>
+        <ul>
+            <li><strong>Gaze X & Gaze Y:</strong> Tọa độ pixel thực tế thay đổi đồng bộ theo vị trí điểm nhìn trên khung Camera. Khi Stop hiển thị gạch nối "-".</li>
+            <li><strong>Confidence:</strong> Mức độ tin cậy của thuật toán theo dõi (92% - 97%), hiển thị màu xanh lá.</li>
+            <li><strong>FPS:</strong> Tốc độ khung hình thực tế (~30 FPS).</li>
+        </ul>
+    </li>
+    <li><strong>Trạng thái hệ thống (Status):</strong>
+        <ul>
+            <li>Khi chưa bấm Start hoặc bấm Stop: Hiển thị <code>Status: • Stopping</code> (chấm đỏ).</li>
+            <li>Khi bấm Start đang chạy: Hiển thị <code>Status: • Tracking</code> (chấm xanh lá phát sáng) kèm thời gian đếm lùi 10s.</li>
+            <li>Khi bấm Pause: Hiển thị <code>Status: • Pausing</code> (chấm vàng).</li>
+        </ul>
+    </li>
+    <li><strong>Bộ 3 nút điều khiển:</strong> <code>[ Start ]</code>, <code>[ Pause ]</code> / <code>[ Continue ]</code>, <code>[ Stop ]</code> với giao diện viền xanh cyan đồng bộ:
+        <ul>
+            <li>Khi đang Pausing: Nút Pause tự động đổi thành <code>[ Continue ]</code> để tiếp tục theo dõi, đồng thời nút <code>[ Start ]</code> bị vô hiệu hóa (disabled).</li>
+            <li>Khi đang Tracking: Nút <code>[ Start ]</code> bị vô hiệu hóa, nút <code>[ Pause ]</code> hoạt động bình thường.</li>
+            <li>Khi đang Stopping: Nút <code>[ Start ]</code> sẵn sàng, nút <code>[ Pause ]</code> bị vô hiệu hóa.</li>
+        </ul>
+    <li><strong>Bố cục mở rộng toàn màn hình:</strong> Thiết kế chiếm trọn chiều ngang màn hình (gần như full screen trừ thanh Sidebar bên trái), khung Camera Feed co giãn tự động theo chiều cao màn hình (lên tới 520px+ trên màn hình lớn) mang lại không gian theo dõi trực quan và chuyên nghiệp.</li>
+    <li><strong>Cấu trúc Layout:</strong> Khung giao diện chính được tách biệt vào <code>src/layouts/GazeEstimateLayout.jsx</code> và được gọi vào trang <code>GazeEstimatePage.jsx</code>.</li>
+</ul>
+
+<h3>5.5. Các tính năng đang lên kế hoạch (Stubs)</h3>
+<ul>
+    <li><strong>my-analytics:</strong> Phân tích chuyên sâu các chỉ số quang học mắt: Attention, Gaze distribution, Fixation (điểm dừng mắt), Saccade (chuyển động giật mắt).</li>
+    <li><strong>reports:</strong> Xuất dữ liệu báo cáo ra Excel/CSV, xem lại lịch sử phiên theo dõi và hình ảnh nhiệt.</li>
+    <li><strong>test-session:</strong> Theo dõi chi tiết từng phiên chạy thử nghiệm.</li>
+</ul>
+
+<h2>6. CÁC QUY ƯỚC LẬP TRÌNH & LƯU Ý KỸ THUẬT (GOTCHAS)</h2>
+
+<div class="warning-box">
+    <strong>LƯU Ý QUAN TRỌNG KHI CODE TRÊN DỰ ÁN:</strong>
+</div>
+
+<ol>
+    <li>
+        <strong>Cú pháp MUI v9 Grid:</strong><br>
+        MUI v9 đã thay đổi cách dùng Grid. Tuyệt đối không dùng <code>xs={12} md={4}</code> hay <code>item</code>. Bắt buộc dùng prop <code>size</code>:
+        <pre><code>// ĐÚNG:
+&lt;Grid size={{ xs: 12, md: 4 }}&gt; ... &lt;/Grid&gt;
+
+// SAI (Legacy):
+&lt;Grid item xs={12} md={4}&gt; ... &lt;/Grid&gt;</code></pre>
+    </li>
+    <li>
+        <strong>Cú pháp MUI v9 <code>slotProps</code>:</strong><br>
+        Không dùng các prop cũ như <code>inputProps</code>, <code>primaryTypographyProps</code> vì chúng sẽ bị rò rỉ trực tiếp xuống thẻ HTML DOM và gây lỗi cảnh báo trên console. Bắt buộc dùng <code>slotProps</code>:
+        <pre><code>// ĐÚNG:
+&lt;ListItemText slotProps={{ primary: { pr: 10 } }} /&gt;
+&lt;TextField slotProps={{ input: { readOnly: true } }} /&gt;</code></pre>
+    </li>
+    <li>
+        <strong>Đường dẫn tắt (Path Alias):</strong><br>
+        Dùng tiền tố <code>@/</code> để import từ thư mục <code>src/</code> (Ví dụ: <code>import api from '@/services/api'</code>).
+    </li>
+    <li>
+        <strong>Lệnh khởi chạy trên Windows PowerShell:</strong><br>
+        Nếu gặp lỗi <em>"running scripts is disabled on this system"</em> khi gõ <code>npm run dev</code> trong PowerShell, sử dụng lệnh:
+        <pre><code>cmd.exe /c "npm run dev"
+cmd.exe /c "npm run lint"</code></pre>
+    </li>
+    <li>
+        <strong>Các điểm tồn đọng cần sửa trong mã nguồn:</strong>
+        <ul>
+            <li><strong>Lỗi chính tả (Typo):</strong> Thuộc tính <code>caibration_type</code> (thiếu chữ 'l') trong <code>userService.js</code> và <code>TrackingConfiguration.jsx</code>.</li>
+            <li><strong>Hardcoded User:</strong> Trong <code>AvatarCard.jsx</code> đang gán cứng tên <code>"Nguyễn Trần Quang Tuyển"</code> thay vì lấy từ dữ liệu <code>user</code> truyền vào.</li>
+            <li><strong>CalibrationProcess:</strong> Hiện chỉ là giao diện sơ khai với 2 nút bấm chuyển trang, chưa có canvas/animation để người dùng nhìn vào điểm kiểm tra.</li>
+            <li><strong>Backend API:</strong> Các service hiện tại đang comment hàm <code>api.get()</code> và trả về object tĩnh; cần mở lại khi backend Node.js/Java/Python tại port 8080 sẵn sàng.</li>
+        </ul>
+    </li>
+</ol>
+
+<h2>7. KỸ NĂNG TRỢ LÝ AI (AGENT SKILLS & CUSTOMIZATIONS)</h2>
+<ul>
+    <li>
+        <strong><code>.agents/skills/find-skills</code>:</strong><br>
+        Hỗ trợ tìm kiếm, đề xuất và hướng dẫn cài đặt các skills từ cộng đồng mã nguồn mở.
+    </li>
+    <li>
+        <strong><code>.agents/skills/caveman-commit</code>:</strong><br>
+        Tạo commit message theo chuẩn Conventional Commits ngắn gọn, súc tích tối đa (nguyên tắc <em>"why over what"</em>).
+        Ràng buộc tiêu đề &le; 50-72 ký tự, bỏ qua phần thân nếu không có breaking change / migration / lý do phức tạp,
+        không chứa AI attribution hay filler text. Kích hoạt qua lệnh <code>/caveman-commit</code> hoặc khi yêu cầu viết commit.
+    </li>
+</ul>
+
+<hr>
+<p style="text-align: center; color: #586E75; font-size: 9pt;">
+    Tài liệu phân tích hệ thống - Eye Tracker Admin Dashboard &bull; Lưu trữ nội bộ dự án
+</p>
+
+</body>
+</html>
